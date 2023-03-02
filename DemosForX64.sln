@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SingleAxisOnOff", "SingleAxisOnOff\SingleAxisOnOff.vcxproj", "{5FFF2492-7753-4DB5-A488-FFEFB93B8F1B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SingleMoitonGui", "SingleMoitonGui\SingleMoitonGui.vcxproj", "{FC180DA9-3550-4FFC-ADA2-47D1DDA96DD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -15,6 +17,10 @@ Global
 		{5FFF2492-7753-4DB5-A488-FFEFB93B8F1B}.Debug|x64.Build.0 = Debug|x64
 		{5FFF2492-7753-4DB5-A488-FFEFB93B8F1B}.Release|x64.ActiveCfg = Debug|x64
 		{5FFF2492-7753-4DB5-A488-FFEFB93B8F1B}.Release|x64.Build.0 = Debug|x64
+		{FC180DA9-3550-4FFC-ADA2-47D1DDA96DD5}.Debug|x64.ActiveCfg = Debug|x64
+		{FC180DA9-3550-4FFC-ADA2-47D1DDA96DD5}.Debug|x64.Build.0 = Debug|x64
+		{FC180DA9-3550-4FFC-ADA2-47D1DDA96DD5}.Release|x64.ActiveCfg = Release|x64
+		{FC180DA9-3550-4FFC-ADA2-47D1DDA96DD5}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
