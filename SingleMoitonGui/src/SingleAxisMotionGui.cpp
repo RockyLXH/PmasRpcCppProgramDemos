@@ -141,7 +141,9 @@ int mainloop()
 			static float f = 0.0f;
 			static int counter = 0;
 			static bool enable_check[MAX_AXES] = {false};
-			char str[64];
+			char str[32];
+			static sAXISINFO axis_info[MAX_AXES] = { 0 };
+			sAXISINPUT axis_input[MAX_AXES] = { .0 };
 
 			ImGui::Begin(" ");                          // Create a window called "Hello, world!" and append into it.
 
@@ -155,18 +157,25 @@ int mainloop()
 			if (is_pmas_connected) 
 			{
 				ImGui::SeparatorText("Drive Status");
+
+				axis_info[counter].act_pos = cAxis[counter].GetActualPosition();
+				axis_info[counter].act_vel = cAxis[counter].GetActualVelocity();
+				axis_info[counter].act_cur = cAxis[counter].GetActualTorque();
+
+				counter = (counter >= MAX_AXES -1) ? 0 : ++counter;
+
 				for (auto i = 0; i < MAX_AXES; ++i)
 				{
 
 					sprintf(str, "%s act_pos (cnt) : ", axis_id[i]);
 					ImGui::Text(str); ImGui::SameLine();
-					ImGui::TextColored(ImVec4(1, 0, 1, 1), "%0.0f", cAxis[i].GetActualPosition()); ImGui::SameLine(200, 0);
+					ImGui::TextColored(ImVec4(1, 0, 1, 1), "%.0f", axis_info[i].act_pos); ImGui::SameLine(200, 0);
 					sprintf(str, "%s act_vel (cnt/s) : ", axis_id[i]);
 					ImGui::Text(str); ImGui::SameLine();
-					ImGui::TextColored(ImVec4(1, 0, 1, 1), "%0.0f", cAxis[i].GetActualVelocity()); ImGui::SameLine(400, 0);
+					ImGui::TextColored(ImVec4(1, 0, 1, 1), "%.0f", axis_info[i].act_vel); ImGui::SameLine(400, 0);
 					sprintf(str, "%s act_cur (amp) : ", axis_id[i]);
 					ImGui::Text(str); ImGui::SameLine();
-					ImGui::TextColored(ImVec4(1, 0, 1, 1), "%0.4f", cAxis[i].GetActualTorque());
+					ImGui::TextColored(ImVec4(1, 0, 1, 1), "%.4f", axis_info[i].act_cur);
 				}
 
 				
@@ -220,18 +229,7 @@ int mainloop()
 
 int main(int, char**)
 {
-	//InitAxis();
-
 	mainloop();
-
-	//cAxis[0].PowerOn();
-	//while (!(cAxis[0].ReadStatus() & NC_AXIS_STAND_STILL_MASK));
-
-	//Sleep(5000);
-
-	//cAxis[0].PowerOff();
-
-	//CloseConnection();
 
 	return 0;
 }

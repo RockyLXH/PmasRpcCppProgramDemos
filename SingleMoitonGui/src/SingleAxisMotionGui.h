@@ -21,3 +21,20 @@ CMMCSingleAxis		cAxis[MAX_AXES];
 char DEST_IP[] = "192.168.1.3";
 bool is_pmas_connected = false;
 char axis_id[3][20];
+
+struct AxisInfo
+{
+	double act_pos;
+	double act_vel;
+	double act_cur;
+};
+
+using sAXISINFO = struct AxisInfo;
+
+struct AxisInput
+{
+	double target_pos;
+	double target_vel;
+};
+
+using sAXISINPUT = struct AxisInput;
