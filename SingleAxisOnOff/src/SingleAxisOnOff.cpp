@@ -28,6 +28,7 @@ int CallbackFunc(char* recv_buf, short buf_size, void* lpsock)
 		break;
 	case SYSTEMERROR_EVT:
 		printf("\n System Error Event received ");
+		break;
 	case TABLE_UNDERFLOW_EVT:
 		printf("\n Underflow event received ");
 		break;
@@ -53,8 +54,8 @@ int InitAxis()
 
 	connection.RegisterEventCallback(MMCPP_EMCY, (void*)nullptr);
 
-	CMMCPPGlobal::Instance()->SetThrowFlag(true);
-	CMMCPPGlobal::Instance()->SetThrowWarningFlag(false);
+	CMMCPPGlobal::Instance() -> SetThrowFlag(true);
+	CMMCPPGlobal::Instance() -> SetThrowWarningFlag(false);
 
 	cAxis[0].InitAxisData("a01", com_handle);
 
@@ -70,6 +71,15 @@ int CloseConnection()
 
 int main(int, char**)
 {
+	Logger::Init();
+	
+	LOG_TRACE("TRACE: Logger system is working");
+	LOG_DEBUG("DEBUG: Logger system is working");
+	LOG_INFO("INFO: Logger system is working");
+	LOG_WARN("WARN: Logger system is working");
+	LOG_ERROR("ERROR: Logger system is working");
+	LOG_CRITICAL("CRITICAL: Logger system is working");
+
 	InitAxis();
 
 	cAxis[0].PowerOn();

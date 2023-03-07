@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SingleAxisOnOff", "SingleAx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SingleMoitonGui", "SingleMoitonGui\SingleMoitonGui.vcxproj", "{FC180DA9-3550-4FFC-ADA2-47D1DDA96DD5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Log", "Log\Log.vcxproj", "{EF6C2ECC-E249-4105-B780-4C553BB88328}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{FC180DA9-3550-4FFC-ADA2-47D1DDA96DD5}.Debug|x64.Build.0 = Debug|x64
 		{FC180DA9-3550-4FFC-ADA2-47D1DDA96DD5}.Release|x64.ActiveCfg = Release|x64
 		{FC180DA9-3550-4FFC-ADA2-47D1DDA96DD5}.Release|x64.Build.0 = Release|x64
+		{EF6C2ECC-E249-4105-B780-4C553BB88328}.Debug|x64.ActiveCfg = Debug|x64
+		{EF6C2ECC-E249-4105-B780-4C553BB88328}.Debug|x64.Build.0 = Debug|x64
+		{EF6C2ECC-E249-4105-B780-4C553BB88328}.Release|x64.ActiveCfg = Release|x64
+		{EF6C2ECC-E249-4105-B780-4C553BB88328}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,7 @@
 
 #include "OS_PlatformDependSetting.hpp"
 #include "MMCPPlib.hpp"
+#include "Log/log.h"
 
 #define HOST_IP		"192.168.1.2"
 #define DEST_IP		"192.168.1.3"

@@ -13,19 +13,19 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5fff2492-7753-4db5-a488-ffefb93b8f1b}</ProjectGuid>
-    <RootNamespace>SingleAxisOnOff</RootNamespace>
+    <ProjectGuid>{ef6c2ecc-e249-4105-b780-4c553bb88328}</ProjectGuid>
+    <RootNamespace>Log</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -46,33 +46,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
-    <IncludePath>C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMCPP\Src\OsPlatform\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMCPP\Src\OsCommon\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMC_APP\Src\OsPlatform\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMC_APP\Src\OsCommon\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMCPP\Src\OsCommon\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMCPP\Src\OsPlatform\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMC_APP\Src\OsCommon\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMC_APP\Src\OsPlatform\includes;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Libs;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
-    <IncludePath>C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMCPP\Src\OsPlatform\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMCPP\Src\OsCommon\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMC_APP\Src\OsPlatform\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMC_APP\Src\OsCommon\includes;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Libs;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level2</WarningLevel>
-      <SDLCheck>
-      </SDLCheck>
-      <PreprocessorDefinitions>WIN64;_DEBUG;_CONSOLE;ENDIAN_SELECT=123;OS_PLATFORM=555;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>Default</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Log\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <SupportJustMyCode>false</SupportJustMyCode>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>LOG_LIB;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Log\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>MMC_APP_Win64.lib;MMCPP_Win64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -83,26 +72,21 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Log\vendor\spdlog\include;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMC_APP\Src\OsPlatform\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMCPP\Src\OsPlatform\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMCPP\Src\OsCommon\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMC_APP\Src\OsCommon\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Log\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Libs\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\SingleAxisOnOff.h" />
+    <ClInclude Include="log.h" />
+    <ClInclude Include="src\Logger.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\SingleAxisOnOff.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Log\Log.vcxproj">
-      <Project>{ef6c2ecc-e249-4105-b780-4c553bb88328}</Project>
-    </ProjectReference>
+    <ClCompile Include="src\Logger.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
