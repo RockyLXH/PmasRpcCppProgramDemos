@@ -13,9 +13,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5fff2492-7753-4db5-a488-ffefb93b8f1b}</ProjectGuid>
-    <RootNamespace>SingleAxisOnOff</RootNamespace>
+    <ProjectGuid>{e9262fe4-7d8c-42f7-b45f-529859d24c85}</ProjectGuid>
+    <RootNamespace>ElecticGeraring</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ElectronicGearing</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -52,8 +53,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)Headers\MMCPP\Src\OsPlatform\includes;$(SolutionDir)Headers\MMCPP\Src\OsCommon\includes;$(SolutionDir)Headers\MMC_APP\Src\OsPlatform\includes;$(SolutionDir)Headers\MMC_APP\Src\OsCommon\includes;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>$(SolutionDir)Libs;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -62,11 +61,10 @@
       </SDLCheck>
       <PreprocessorDefinitions>WIN64;_DEBUG;_CONSOLE;ENDIAN_SELECT=123;OS_PLATFORM=555;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Log\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <SupportJustMyCode>false</SupportJustMyCode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Log\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -83,26 +81,19 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)Log\vendor\spdlog\include;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMC_APP\Src\OsPlatform\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMCPP\Src\OsPlatform\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMCPP\Src\OsCommon\includes;C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Headers\MMC_APP\Src\OsCommon\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Works\Elmo Stuff\Win32_64ProgramForMAS\DemosForX64\Libs\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\SingleAxisOnOff.h" />
+    <ClCompile Include="src\ElectronicGearing.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\SingleAxisOnOff.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Log\Log.vcxproj">
-      <Project>{ef6c2ecc-e249-4105-b780-4c553bb88328}</Project>
-    </ProjectReference>
+    <ClInclude Include="src\ElectronicGearing.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

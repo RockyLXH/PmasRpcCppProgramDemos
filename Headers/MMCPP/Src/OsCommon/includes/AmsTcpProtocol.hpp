@@ -47,12 +47,12 @@
 	#include <errno.h>
 	#include <netinet/tcp.h>
 
-	#include "MMCPPGlobal.h"
-	#include "MMCSocket.h"
+	#include "MMCPPGlobal.hpp"
+	#include "MMCSocket.hpp"
 #endif
                     
                     
-#include <AmsTcpUdpProtocolDef.h>
+#include <AmsTcpUdpProtocolDef.hpp>
 
                     /* Define dump line length. Number of chars in one dump line (line length is more then  */
                     /* twice as: Space from begin of line, Hex, Space (betweens Hex to ascci) Asscii...     */
@@ -140,13 +140,13 @@
                             /* Dbg Service, when iDbgCommuFlag != 0 print communication */
         void    AmsSetDbg        (ELMO_INT32 iDbgLclFlag, ELMO_INT32 iDbgCommuFlag);
                            /* Dbg service, print string in Hex & Ascii format           */
-        void    DumpStreamBuffer    (ELMO_UINT8 pucStrStream[], ELMO_UINT16 uiNumCharForPrint);
+        void    DumpStreamBuffer    (ELMO_UINT8 pucStrStream[], ELMO_UINT32 uiNumCharForPrint);
 
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
                     /* Original takes From MMCTCP !!!! */
                     /* Original takes From MMCTCP !!!! */
-#include    "AmsTcpProtocolTcp.h"
+#include    "AmsTcpProtocolTcp.hpp"
                     /* Original takes From MMCTCP !!!! */
                     /* Original takes From MMCTCP !!!! */
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */

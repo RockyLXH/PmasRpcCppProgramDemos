@@ -6,6 +6,7 @@
 /// Version     : 0.0.1
 ///               0.2.0 Updated 20Jan2015 Haim H. native Data Types (names), for supporting 64B OS.
 ///               0.4.2 Updated 26Aug2019 Haim H.
+///               0.4.3 Updated 20Apr2021 Haim H. Updates according to update in "Gen C lib in Plastic"
 /// Copyright   : Your copyright notice
 /// Description : This file contain definitions for ...
 ////////////////////////////////////////////////////////////////////////////////
@@ -37,6 +38,7 @@ typedef enum OP_MODE_DS402
     OPM402_CYCLIC_SYNC_POSITION_MODE = 8,
     OPM402_CYCLIC_SYNC_VELOCITY_MODE = 9,
     OPM402_CYCLIC_SYNC_TORQUE_MODE = 10,
+	OPM402_CYCLIC_SYNC_TORQUE_MODE_WITH_ANGLE = 11,
 }OPM402;
 
 typedef enum comm_err
@@ -295,8 +297,8 @@ typedef struct mmc_getpdoinfo_out
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_LINT32     lData;
-    ELMO_ULINT32    ulDataLength;
+    int32_t         lData;
+    uint32_t        ulDataLength;
     ELMO_UINT16     usSlaveID;   // 2
     ELMO_UINT16     usIndex;
     ELMO_UINT8      ucSubIndex;
@@ -310,8 +312,8 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_LINT32     lData;
-    ELMO_ULINT32    ulDataLength;
+    int32_t         lData;
+    uint32_t        ulDataLength;
     ELMO_UINT16     usStatus;    ///< Returned command status.
     ELMO_INT16      usErrorID;    ///< Returned command error ID.
 }MMC_SENDSDO_OUT;
@@ -327,8 +329,8 @@ typedef union
         ELMO_FLOAT  fData;
         ELMO_UINT64 ullData;
         ELMO_INT64  llData;
-        ELMO_ULINT32 ulData;
-        ELMO_LINT32 lData;
+        uint32_t    ulData;
+        int32_t     lData;
         ELMO_UINT32 uiData;
         ELMO_INT32  iData;
         ELMO_UINT16 usData;
@@ -349,7 +351,7 @@ typedef struct mmc_sendsdoex_in
         SEND_SDO_DATA_EX uData;
 
         //Reserve
-        ELMO_LINT32 pReserve[10];
+        int32_t     pReserve[10];
 
         ELMO_UINT16 usIndex;     //index
         ELMO_UINT8  ucSubIndex;  //sub index
@@ -369,7 +371,7 @@ typedef struct mmc_sendsdoex_out
         SEND_SDO_DATA_EX uData;
 
         //Reserve
-        ELMO_LINT32 pReserve[10];
+        int32_t     pReserve[10];
 
         ELMO_UINT16 usStatus;
         ELMO_UINT16 usErrorID;
@@ -567,10 +569,10 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_ULINT32    dwSendErrors;
-    ELMO_ULINT32    dwReceiveErrors;
-    ELMO_ULINT32    dwWrongWC;
-    ELMO_ULINT32    dwParseErrors;
+    uint32_t        dwSendErrors;
+    uint32_t        dwReceiveErrors;
+    uint32_t        dwWrongWC;
+    uint32_t        dwParseErrors;
     ELMO_UINT16     usNumOfSlaves;
     ELMO_UINT16     usStatus;
     ELMO_INT16      usErrorID;
@@ -723,7 +725,7 @@ typedef struct
         ELMO_UINT16                     usRedundancySlaveCount;
         ELMO_UINT16                     usNetworkState;
         MMC_ETHERCAT_DIAGNOSTICS_INFO   pDiagnosticsSlavesArr[ETHERCAT_ID_MAX];
-        ELMO_ULINT32                    ulSpare[50];
+    	uint32_t ulSpare[50];
 }MMC_GETCOMMDIAGNOSTICSEX_OUT;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -888,7 +890,7 @@ typedef struct mmc_getbulkuploadstatus_in
 typedef struct mmc_getbulkuploadstatus_out
 {
     ELMO_UINT32 uiSizeCompleted;
-    ELMO_ULINT32 ulSizeReported;
+    uint32_t    ulSizeReported;
     ELMO_UINT16 usStatus;
     ELMO_INT16  usErrorID;
     ELMO_INT16  usCommError;
@@ -898,8 +900,8 @@ typedef struct mmc_getbulkuploadstatus_out
 
 typedef struct mmc_getbulkuploaddata_in
 {
-    ELMO_ULINT32    ulStartIndex;
-    ELMO_ULINT32    ulEndIndex;
+    uint32_t    ulStartIndex;
+    uint32_t    ulEndIndex;
 } MMC_GETBULKUPLOADDATA_IN;
 
 typedef struct mmc_getbulkuploaddata_out

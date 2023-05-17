@@ -125,9 +125,9 @@
 	protected:
 	//#ifndef WIN32
 	#if   (OS_PLATFORM == LINUXIPC32_PLATFORM)
-		friend ELMO_PVOID fnTCPClbkThread(ELMO_PVOID);   //call-back argument for pthread_create within RunClbkThread.
+		friend ELMO_PVOID fnAmsTCPClbkThread(ELMO_PVOID);   //call-back argument for pthread_create within RunClbkThread.
 	#else
-		friend ELMO_INT32 DLLMMCPP_API fnTCPClbkThread( ELMO_PVOID lpParam );
+		friend ELMO_INT32 DLLMMCPP_API fnAmsTCPClbkThread( ELMO_PVOID lpParam );
 	#endif
 	
 		/**! \fn int IsPending(int iSock, bool& bFail)

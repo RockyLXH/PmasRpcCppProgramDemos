@@ -6,6 +6,7 @@
 ///               0.2.0 Updated 20Jan2015 Haim H. native Data Types (names), for supporting 64B OS.
 ///               0.4.0 Updated 11Sep2017 Haim H.
 ///               0.4.2 Updated 26Aug2019 Haim H.
+///               0.4.3 Updated 14Apr2021 Haim H. Add: #include <stdint.h>
 /// Copyright   : Your copyright notice
 /// Description : This file contain GMAS RPC WIN32 Operating System  Platform dependencies.
 ///               The file is selected to be including in OS_Platform.h in case target select to be WIN32
@@ -23,6 +24,7 @@
     #include <io.h>
     #include <stdlib.h>
 	#include <limits.h>
+	#include <stdint.h>
     
 
 

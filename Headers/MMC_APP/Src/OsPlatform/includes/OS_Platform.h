@@ -35,12 +35,6 @@ typedef enum {
 }eGMAS_ENDIAN_TYPE;
 
 
-				/* This pack command is same for Visual and Gnu */
-				/* Set here for whole using compilers			*/
-				/* sspection for compiler type use for VxWorks	*/
-#define START_STREAM_PACKED	#pragma pack(push, 0)
-#define END_STREAM_PACKED	#pragma pack(pop)
-
 #if   (OS_PLATFORM == LINUXIPC32_PLATFORM)
     #define NC_ALIGNMENT __attribute__((aligned(8)))
     #define LINUX_ALIGNMENT

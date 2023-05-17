@@ -7,6 +7,7 @@
 ///               0.2.0 Updated 20Jan2015 Haim H. native Data Types (names), for supporting 64B OS.
 ///               0.4.2 Updated 26Aug2019 Haim H.
 ///               0.4.4 Updated 16Nov2020 Haim H.
+///               0.4.5 Updated 20Apr2021 Haim H. Updates according to update in "Gen C lib in Plastic"
 /// Copyright   : Your copyright notice
 /// Description : This file contain definitions for ...
 ////////////////////////////////////////////////////////////////////////////////
@@ -531,7 +532,7 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_ULINT32 ulValue;
+    uint32_t	ulValue;
     ELMO_UINT16 usStatus;
     ELMO_INT16 usErrorID;
 }MMC_READDIGITALINPUTS_OUT;
@@ -596,9 +597,9 @@ typedef struct mmc_readdigitaloutput32Bit_in
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct mmc_readdigitaloutput32Bit_out
 {
-    ELMO_ULINT32 ulValue;
+    uint32_t	ulValue;
     ELMO_UINT16 usStatus;
-    ELMO_INT16 usErrorID;
+    ELMO_INT16 	usErrorID;
 }MMC_READDIGITALOUTPUT32Bit_OUT;
 
 
@@ -608,9 +609,9 @@ typedef struct mmc_readdigitaloutput32Bit_out
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct mmc_writedigitaloutput32Bit_in
 {
-    ELMO_INT32 iOutputNumber;
-    ELMO_ULINT32 ulValue;
-    ELMO_UINT8 ucEnable;
+    ELMO_INT32	iOutputNumber;
+    uint32_t	ulValue;
+    ELMO_UINT8	ucEnable;
 }MMC_WRITEDIGITALOUTPUT32Bit_IN;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -722,7 +723,7 @@ typedef struct
 typedef struct
 {
     /* HH unsigned long ulState;    */      ///< Axis state.
-    ELMO_UINT32 ulState;         ///< Axis state.
+	uint32_t ulState;			///< Axis state.
 
     ELMO_UINT16 usStatus;        ///< Returned command status.
     ELMO_INT16 usErrorID;        ///< Returned command error ID.
@@ -1021,7 +1022,7 @@ typedef struct mmc_touchprobedisable_out
 
 typedef struct mmc_touchprobeenable_ex_in
 {
-	ELMO_ULINT32   ulShmArraySizeAlloc;	// 2-100000
+	uint32_t  	 ulShmArraySizeAlloc;	// 2-100000
 	ELMO_UINT16  usConfig;     			// Enabled = 0x1, Continuous Mode = 0x2 , Rising Edge = 0x10 , Falling edge = 0x20
 	ELMO_UINT16  usSpare[9];
 }MMC_TOUCHPROBEENABLE_EX_IN;
@@ -1036,8 +1037,8 @@ typedef struct mmc_touchprobeenable_ex_out
 
 typedef struct mmc_touchprobedisable_ex_in
 {
-	ELMO_INT16  sTPIndex;               // Global TP mechanism index (0-5), or -1 for disabling all Touch Probe mechanisms
-	ELMO_INT16  sSpare[11];
+	ELMO_INT16   sTPIndex;               // Global TP mechanism index (0-5), or -1 for disabling all Touch Probe mechanisms
+	ELMO_INT16   sSpare[11];
 }MMC_TOUCHPROBEDISABLE_EX_IN;
 
 typedef struct mmc_touchprobedisable_ex_out
@@ -1053,9 +1054,9 @@ typedef struct mmc_gettouchprobestatus_in
 
 typedef struct mmc_gettouchprobestatus_out
 {
-	ELMO_ULINT32 ulExistingPoints[6];   // updated # of existing points in the array.
-	ELMO_ULINT32 ulTPEvtCnt[6];	        // total # of Touch Probe events that occurred.
-	ELMO_ULINT32 ulShmArraySizeAlloc[6];// 2-100000
+	uint32_t  	 ulExistingPoints[6];     // updated # of existing points in the array.
+	uint32_t  	 ulTPEvtCnt[6];	        // total # of Touch Probe events that occurred.
+	uint32_t  	 ulShmArraySizeAlloc[6]; // 2-100000
 	ELMO_UINT16  usMissedTPFlag[6];
 	ELMO_UINT16  usOverflowTPFlag[6];
 	ELMO_UINT16  usAxisRef[6];
@@ -1073,10 +1074,10 @@ typedef struct mmc_gettouchprobedata_in
 
 typedef struct mmc_gettouchprobedata_out
 {
-	ELMO_ULINT32 ulExistingPoints;      // updated # of existing points in the array.
-	ELMO_ULINT32 ulTPEvtCnt;	        // total # of Touch Probe events that occurred.
+	uint32_t  	 ulExistingPoints;       	// updated # of existing points in the array.
+	uint32_t  	 ulTPEvtCnt;	        	// total # of Touch Probe events that occurred.
 	ELMO_DOUBLE  dUURatio;		        // UU conversion factor
-	ELMO_LINT32  lData[350];			// Data in indexes above usCopiedPoints are irrelevant
+	int32_t  	 lData[350];				// Data in indexes above usCopiedPoints are irrelevant
 	ELMO_UINT16  usCopiedPoints;      	// 1-350
 	ELMO_UINT16  usMissedTPFlag;
 	ELMO_UINT16  usOverflowTPFlag;
@@ -1087,33 +1088,33 @@ typedef struct mmc_gettouchprobedata_out
 
 typedef struct
 {
-	ELMO_ULINT32  ulExistingPoints;     // updated # of existing points in the array.
-	ELMO_ULINT32  ulTPEvtCnt;	        // total # of Touch Probe events that occurred.
-	ELMO_DOUBLE   dUURatio;		        // UU conversion factor
+	uint32_t  	 ulExistingPoints;       	// updated # of existing points in the array.
+	uint32_t  	 ulTPEvtCnt;	        	// total # of Touch Probe events that occurred.
+	ELMO_DOUBLE  dUURatio;		        // UU conversion factor
 }MMC_GETTOUCHPROBEDATA_OUT_1;
 
 typedef struct
 {
-	ELMO_ULINT32  ulExistingPoints;     // updated # of existing points in the array.
-	ELMO_ULINT32  ulTPEvtCnt;	        // total # of Touch Probe events that occurred.
-	ELMO_DOUBLE   dUURatio;		        // UU conversion factor
-	ELMO_LINT32   lData[350];			// Data in indexes above usCopiedPoints are irrelevant
+	uint32_t  	 ulExistingPoints;       	// updated # of existing points in the array.
+	uint32_t  	 ulTPEvtCnt;	        	// total # of Touch Probe events that occurred.
+	ELMO_DOUBLE  dUURatio;		        // UU conversion factor
+	int32_t  	 lData[350];				// Data in indexes above usCopiedPoints are irrelevant
 }MMC_GETTOUCHPROBEDATA_OUT_2;
 
 typedef struct
 {
-	ELMO_ULINT32 ulExistingPoints;      // updated # of existing points in the array.
-	ELMO_ULINT32 ulTPEvtCnt;	        // total # of Touch Probe events that occurred.
+	uint32_t  	 ulExistingPoints;       	// updated # of existing points in the array.
+	uint32_t  	 ulTPEvtCnt;	        	// total # of Touch Probe events that occurred.
 	ELMO_DOUBLE  dUURatio;		        // UU conversion factor
-	ELMO_LINT32  lData[350];			// Data in indexes above usCopiedPoints are irrelevant
+	int32_t  	 lData[350];				// Data in indexes above usCopiedPoints are irrelevant
 	ELMO_UINT16  usCopiedPoints;      	// 1-350
 	ELMO_UINT16  usMissedTPFlag;
 }MMC_GETTOUCHPROBEDATA_OUT_3;
 
 typedef struct
 {
-	ELMO_ULINT32 ulExistingPoints;      // updated # of existing points in the array.
-	ELMO_ULINT32 ulTPEvtCnt;	        // total # of Touch Probe events that occurred.
+	uint32_t  	 ulExistingPoints;       	// updated # of existing points in the array.
+	uint32_t  	 ulTPEvtCnt;	        	// total # of Touch Probe events that occurred.
 	ELMO_DOUBLE  dUURatio;		        // UU conversion factor
 	ELMO_UINT16  usCopiedPoints;      	// 1-350
 	ELMO_UINT16  usMissedTPFlag;
@@ -1125,9 +1126,9 @@ typedef struct
 
 typedef struct
 {
-	ELMO_ULINT32 ulExistingPoints;      // updated # of existing points in the array.
-	ELMO_ULINT32 ulTPEvtCnt;	        // total # of Touch Probe events that occurred.
-	ELMO_LINT32  lData[350];			// Data in indexes above usCopiedPoints are irrelevant
+	uint32_t  	 ulExistingPoints;       	// updated # of existing points in the array.
+	uint32_t  	 ulTPEvtCnt;	        	// total # of Touch Probe events that occurred.
+	int32_t  	 lData[350];				// Data in indexes above usCopiedPoints are irrelevant
 	ELMO_UINT16  usCopiedPoints;      	// 1-350
 	ELMO_UINT16  usMissedTPFlag;
 	ELMO_UINT16  usOverflowTPFlag;
@@ -1163,17 +1164,121 @@ typedef struct mmc_touchprobestart_out
 
 
 ///////////////////////////////////////////////////////////////////////////////
+typedef enum
+{
+	MMC_ACC_FF_X_AXIS_REF_INDEX  = 0,	//self-coefficient or axis-ref
+	MMC_ACC_FF_Y_AXIS_REF_INDEX  = 1,
+	MMC_ACC_FF_Z_AXIS_REF_INDEX  = 2,
+	MMC_MAX_ACC_FF_AXES_REF = 3
+
+}ACC_FF_AXIS_REF_INDEX_ENUM;
+
+typedef struct
+{
+	ELMO_DOUBLE dAccCoef[MMC_MAX_ACC_FF_AXES_REF];
+	ELMO_DOUBLE dVelCoef[MMC_MAX_ACC_FF_AXES_REF];
+
+} MMC_ACC_FF_COEF_ENHANCED;
+
+typedef struct
+{
+	MMC_ACC_FF_COEF_ENHANCED stEnhanced;
+	ELMO_DOUBLE dGantryCoef;
+	ELMO_DOUBLE dGantryOffset;
+
+} MMC_ACC_FF_COEF_GANTRY;	// when dAccCoef[MMC_ACC_FF_X_AXIS_REF_INDEX] isn't constant, and depends on axisYpos
+
+typedef union
+{
+	ELMO_DOUBLE					dAccCoef[MMC_MAX_ACC_FF_AXES_REF]; // 24 bytes
+	MMC_ACC_FF_COEF_ENHANCED 	stEnhanced;  	  // 48 bytes
+	MMC_ACC_FF_COEF_GANTRY 		stGantry;     	  // 64 bytes
+	ELMO_UINT8 					ucMaxSize[128];
+
+} MMC_ACC_FF_COEF_UNION;
+
+typedef enum
+{
+	ACC_FF_NONE     = 0,
+	ACC_FF_SIMPLE   = 1,
+	ACC_FF_ENHANCED = 2,
+	ACC_FF_GANTRY   = 3,
+	ACC_FF_SPARE1   = 4,
+	ACC_FF_SPARE2   = 5,
+
+} ACC_FF_MODE_ENUM;
+
+typedef enum
+{
+	ACC_FF_ERASE    = -1,
+	ACC_FF_DISABLE  = 0,
+	ACC_FF_ENABLE   = 1,
+
+} ACC_FF_ENABLE_ENUM;
+
+typedef struct
+{
+	ELMO_UINT16 usAxisRefs[4];		// axis refs: X, Y, Z, spare/padding
+	ELMO_INT32  iAccFFMode;
+    ELMO_LINT32 lSpare[21];
+    MMC_ACC_FF_COEF_UNION u_CoefAccFF;	// typically up to 64 bytes (max=128)
+
+} MMC_SETACCFFMODE_IN;					// typically up to 160 bytes (max=224)
+
+typedef struct
+{
+	ELMO_UINT16  usAccFFIndex;  // Global AccFF mechanism index (0-4).
+	ELMO_UINT16  usDummy;
+	ELMO_UINT16  usStatus;
+	ELMO_INT16  sErrorID;
+
+} MMC_SETACCFFMODE_OUT;
+
+
+typedef struct
+{
+	ELMO_UINT16  usSpare[10];
+
+}MMC_GETACCFFINFO_IN;
+
+typedef struct
+{
+	ELMO_UINT16 usAxisRefs[4];		// axis refs: X, Y, Z, padding
+	ELMO_INT32  iAccFFMode;
+    ELMO_LINT32 lSpare[21];
+    MMC_ACC_FF_COEF_UNION u_CoefAccFF;	// typically up to 64 bytes (max=128)
+    ELMO_INT32  iAccFFMechanismIndex;	// 1..5
+	ELMO_UINT16 usStatus;
+	ELMO_INT16  sErrorID;
+
+}MMC_GETACCFFINFO_OUT;
+
+
+typedef struct
+{
+	ELMO_INT16	sEnable;		//!< Disable(0), Enable(1), Erase AccFF data for this axis(-1)
+	ELMO_INT16  sSpare[11];		//!< for future use.
+
+}MMC_ENABLEACCFF_IN;
+
+typedef struct
+{
+	ELMO_UINT16  usStatus;
+	ELMO_INT16   sErrorID;
+
+}MMC_ENABLEACCFF_OUT;
+
 /// \struct MMC_AXISLINK_IN
 /// \brief
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct mmc_axislink_in
 {
-    ELMO_ULINT32 ulInputParameter1;
-    ELMO_ULINT32 ulInputParameter2;
-    ELMO_ULINT32 ulInputParameter3;
-    ELMO_ULINT32 ulInputParameter4;
+	uint32_t 	ulInputParameter1;
+	uint32_t 	ulInputParameter2;
+	uint32_t 	ulInputParameter3;
+	uint32_t 	ulInputParameter4;
     ELMO_UINT16 usSlaveAxisReference;
-    ELMO_UINT8 ucMode;
+    ELMO_UINT8 	ucMode;
 
 }MMC_AXISLINK_IN;
 
@@ -1184,7 +1289,7 @@ typedef struct mmc_axislink_in
 typedef struct mmc_axislink_out
 {
     ELMO_UINT16 usStatus;
-    ELMO_INT16 usErrorID;
+    ELMO_INT16 	usErrorID;
 }MMC_AXISLINK_OUT;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1193,7 +1298,7 @@ typedef struct mmc_axislink_out
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct mmc_axisunlink_in
 {
-    ELMO_UINT8 ucdummy;
+    ELMO_UINT8 	ucdummy;
 
 }MMC_AXISUNLINK_IN;
 
@@ -1204,7 +1309,7 @@ typedef struct mmc_axisunlink_in
 typedef struct mmc_axisunlink_out
 {
     ELMO_UINT16 usStatus;
-    ELMO_INT16 usErrorID;
+    ELMO_INT16 	usErrorID;
 }MMC_AXISUNLINK_OUT;
 
 
@@ -1218,7 +1323,7 @@ typedef struct
     ELMO_DOUBLE dbInitModeValue;
     MC_EXECUTION_MODE eExecutionMode;   
     ELMO_UINT8 ucMotionMode;
-ELMO_UINT8 ucSpare[19];
+	ELMO_UINT8 ucSpare[19];
 }MMC_CHANGEOPMODE_EX_IN;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1809,6 +1914,26 @@ MMC_LIB_API ELMO_INT32 MMC_SetOverrideCmd(
         OUT MMC_SETOVERRIDE_OUT* pOutParam);
 
 ////////////////////////////////////////////////////////////////////////////////
+/// \fn int MMC_SetOverrideCmdEx(
+///				IN MMC_CONNECT_HNDL hConn,
+///				IN MMC_AXIS_REF_HNDL hAxisRef,
+///				IN MMC_SETOVERRIDEEX_IN* pInParam,
+///				OUT MMC_SETOVERRIDE_OUT* pOutParam)
+/// \brief This function ...
+/// \param MMC_CONNECT_HNDL hConn - [IN] Connection handle
+/// \param MMC_AXIS_REF_HNDL hAxisRef - [IN] Axis Reference handle
+/// \param MMC_SETOVERRIDEEX_IN* pInParam - [IN] Pointer to Set Override input parameters
+/// \param MMC_SETOVERRIDE_OUT* pOutParam - [OUT] Pointer to Set Override output parameters
+/// \return	return - 0 if success
+/// 				 error_id in case of error
+////////////////////////////////////////////////////////////////////////////////
+MMC_LIB_API ELMO_INT32 MMC_SetOverrideCmdEx(
+	IN MMC_CONNECT_HNDL hConn,
+	IN MMC_AXIS_REF_HNDL hAxisRef,
+	IN MMC_SETOVERRIDEEX_IN* pInParam,
+	OUT MMC_SETOVERRIDE_OUT* pOutParam);
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 /// \fn int MMC_ReadStatusCmd(
 ///             IN MMC_CONNECT_HNDL hConn,
 ///             IN MMC_AXIS_REF_HNDL hAxisRef,
@@ -2340,6 +2465,66 @@ MMC_LIB_API ELMO_INT32 MMC_TouchProbeStart(
 		IN MMC_TOUCHPROBESTART_IN* pInParam,
 		OUT MMC_TOUCHPROBESTART_OUT* pOutParam) ;
 
+////////////////////////////////////////////////////////////////////////////////
+/// \fn int MMC_SetAccFeedForwardMode(
+///				IN MMC_CONNECT_HNDL hConn,
+///				IN MMC_AXIS_REF_HNDL hAxisRef,
+///				IN MMC_SETACCFFMODE_IN* pInParam,
+///				OUT MMC_SETACCFFMODE_OUT* pOutParam)
+/// \brief This function ....
+/// \param hConn - [IN] Connection handle
+/// \param hAxisRef - [IN] Axis Reference handle
+/// \param pInParam - [IN] Pointer to Set AccFF Mode input parameters
+/// \param pOutParam - [OUT] Pointer to Set AccFF Mode output parameters
+/// \return	return - 0 if success
+/// 				 error_id in case of error
+////////////////////////////////////////////////////////////////////////////////
+MMC_LIB_API ELMO_INT32 MMC_SetAccFeedForwardMode(
+		IN MMC_CONNECT_HNDL hConn,
+		IN MMC_AXIS_REF_HNDL hAxisRef,
+		IN MMC_SETACCFFMODE_IN* pInParam,
+		OUT MMC_SETACCFFMODE_OUT* pOutParam) ;
+
+////////////////////////////////////////////////////////////////////////////////
+/// \fn int MMC_GetAccFeedForwardInfo(
+///				IN MMC_CONNECT_HNDL hConn,
+///				IN MMC_AXIS_REF_HNDL hAxisRef,
+///				IN MMC_GETACCFFINFO_IN* pInParam,
+///				OUT MMC_GETACCFFINFO_OUT* pOutParam)
+/// \brief This function ....
+/// \param hConn - [IN] Connection handle
+/// \param hAxisRef - [IN] Axis Reference handle
+/// \param pInParam - [IN] Pointer to Get AccFF Info input parameters
+/// \param pOutParam - [OUT] Pointer to Get AccFF Info output parameters
+/// \return	return - 0 if success
+/// 				 error_id in case of error
+////////////////////////////////////////////////////////////////////////////////
+MMC_LIB_API ELMO_INT32 MMC_GetAccFeedForwardInfo(
+		IN MMC_CONNECT_HNDL hConn,
+		IN MMC_AXIS_REF_HNDL hAxisRef,
+		IN MMC_GETACCFFINFO_IN* pInParam,
+		OUT MMC_GETACCFFINFO_OUT* pOutParam) ;
+
+////////////////////////////////////////////////////////////////////////////////
+/// \fn int MMC_EnableAccFeedForward(
+///				IN MMC_CONNECT_HNDL hConn,
+///				IN MMC_AXIS_REF_HNDL hAxisRef,
+///				IN MMC_ENABLEACCFF_IN* pInParam,
+///				OUT MMC_ENABLEACCFF_OUT* pOutParam)
+/// \brief This function ....
+/// \param hConn - [IN] Connection handle
+/// \param hAxisRef - [IN] Axis Reference handle
+/// \param pInParam - [IN] Pointer to Enable AccFF input parameters
+/// \param pOutParam - [OUT] Pointer to Enable AccFF output parameters
+/// \return	return - 0 if success
+/// 				 error_id in case of error
+////////////////////////////////////////////////////////////////////////////////
+MMC_LIB_API ELMO_INT32 MMC_EnableAccFeedForward(
+		IN MMC_CONNECT_HNDL hConn,
+		IN MMC_AXIS_REF_HNDL hAxisRef,
+		IN MMC_ENABLEACCFF_IN* pInParam,
+		OUT MMC_ENABLEACCFF_OUT* pOutParam) ;
+
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \fn int MMC_AxisLink(
@@ -2535,7 +2720,13 @@ MMC_LIB_API ELMO_INT32 MMC_GetProfileConditioning(
         IN  MMC_PROFCONDINF_IN*     i_params,
         OUT MMC_PROFCONDINF_OUT*    o_params);
 
-
+//@UM 12.05.2020
+MMC_LIB_API ELMO_INT32 MMC_ChangeAxisEcatOPState(
+	IN  MMC_CONNECT_HNDL hConn,
+	IN  MMC_AXIS_REF_HNDL hAxisRef,
+	IN  MMC_CHANGE_ECAT_STATE_IN* pInParam,
+	OUT MMC_CHANGE_ECAT_STATE_OUT* pOutParam);
+//moving to g++ @YL 4-10-2010
 #ifdef __cplusplus
 }
 #endif

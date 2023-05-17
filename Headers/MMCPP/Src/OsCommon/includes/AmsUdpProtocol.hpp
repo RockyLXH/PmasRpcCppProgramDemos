@@ -48,11 +48,11 @@
 	#include <errno.h>
 	#include <netinet/tcp.h>
 
-	#include "MMCPPGlobal.h"
-	#include "MMCSocket.h"
+	#include "MMCPPGlobal.hpp"
+	#include "MMCSocket.hpp"
 #endif
 
-#include <AmsTcpUdpProtocolDef.h>
+#include <AmsTcpUdpProtocolDef.hpp>
 
                     /* Define dump line length. Number of chars in one dump line (line length is more then  */
                     /* twice as: Space from begin of line, Hex, Space (betweens Hex to ascci) Asscii...     */
@@ -130,7 +130,7 @@
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 					/* Orginal takes From MMCUDP !!!!  */
 					/* Orginal takes From MMCUDP !!!!  */
-#include "AmsUdpProtocolUdp.h"
+#include "AmsUdpProtocolUdp.hpp"
 					/* Orginal takes From MMCUDP !!!!  */
 					/* Orginal takes From MMCUDP !!!!  */
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */

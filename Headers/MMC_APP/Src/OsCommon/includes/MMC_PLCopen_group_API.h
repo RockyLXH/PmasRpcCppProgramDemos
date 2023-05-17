@@ -9,6 +9,7 @@
 ///               0.4.0 Updated 11Sep2017 Haim H.
 ///               0.4.2 Updated 26Aug2019 Haim H.
 ///               0.4.2 Updated 16Nov2020 Haim H.
+///               0.4.3 Updated 20Apr2021 Haim H. Update according to update in "Gen C lib in Plastic"
 /// Copyright   : Your copyright notice
 /// Description : This file contain definitions for ...
 ////////////////////////////////////////////////////////////////////////////////
@@ -287,6 +288,7 @@ typedef enum
     MC_BLENDING_PREVIOUS_MODE   = 4,
     MC_BLENDING_NEXT_MODE       = 5,
     MC_BLENDING_HIGH_MODE       = 6,
+	MC_BLENDING_ABORT_MODE		= 7,
 }MC_BUFFERED_MODE_ENUM;
 
 
@@ -370,13 +372,15 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 typedef enum
 {
-    NC_CARTESIAN_TYPE = 0,
-    NC_DELTA_ROBOT_TYPE,
-    NC_SCARA_ROBOT_TYPE,
-    NC_THREE_LINK_ROBOT_TYPE,
-    NC_HXPD_ROBOT_TYPE,
-    NC_DUAL_HEAD_TYPE,
-    NC_LAST_KIN_TYPE
+	eNC_NONE_KIN_TYPE = -1,
+	NC_CARTESIAN_TYPE,
+	NC_DELTA_ROBOT_TYPE,
+	NC_SCARA_ROBOT_TYPE,
+	NC_THREE_LINK_ROBOT_TYPE,
+	NC_DUAL_HEAD_TYPE,
+	NC_DUAL_HEAD_TYPE_, //@YL 20210304 both (4 & 5) considered types for dual head. backward compatibility.
+	NC_HXPD_ROBOT_TYPE,
+	NC_LAST_KIN_TYPE
 }NC_KIN_TYPE;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -495,7 +499,7 @@ typedef struct
     ELMO_UINT8  cSpare1 ;
     ELMO_UINT8  cSpare2 ;
     ELMO_UINT8  cSpare3 ;
-    ELMO_LINT32 lSpare[100] ;
+	int32_t     lSpare[100] ;
 }MC_KIN_REF_DUAL_HEAD;
 
 /*!
@@ -503,7 +507,7 @@ typedef struct
  * \brief this is a data structure, which store x,y coordinates.
  */
 typedef struct _xy_struct {
-    ELMO_DOUBLE x, y;    //<!?x,y)  coordinates for bearing hole -->
+    ELMO_DOUBLE x, y;    //<!—(x,y)  coordinates for bearing hole -->
 } NC_XY_STRUCT;
 
 typedef NC_XY_STRUCT bearings_t;
@@ -866,7 +870,7 @@ typedef struct
 /// \brief Move Circular Absolute Command input data structure.
 ///
 /// (See : " Technical Paper
-///     PLCopen Technical Committee 2 ?Task Force
+///     PLCopen Technical Committee 2 – Task Force
 ///     Function Blocks for motion control:
 ///     Part 4 –Coordinated Motion")
 ///////////////////////////////////////////////////////////////////////////////
@@ -1132,7 +1136,7 @@ typedef struct
 /// \brief Group Enable Command input data structure.
 ///
 /// (See : " Technical Paper
-///     PLCopen Technical Committee 2 ?Task Force
+///     PLCopen Technical Committee 2 – Task Force
 ///     Function Blocks for motion control:
 ///     Part 4 –Coordinated Motion")
 ///////////////////////////////////////////////////////////////////////////////
@@ -1156,7 +1160,7 @@ typedef struct
 /// \brief Group Disable Command input data structure.
 ///
 /// (See : " Technical Paper
-///     PLCopen Technical Committee 2 ?Task Force
+///     PLCopen Technical Committee 2 – Task Force
 ///     Function Blocks for motion control:
 ///     Part 4 –Coordinated Motion")
 ///////////////////////////////////////////////////////////////////////////////
@@ -1239,18 +1243,18 @@ typedef struct
 /// \brief Group Set Position Command input data structure.
 ///
 /// (See : " Technical Paper
-///     PLCopen Technical Committee 2 ?Task Force
+///     PLCopen Technical Committee 2 – Task Force
 ///     Function Blocks for motion control:
 ///     Part 4 –Coordinated Motion")
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_DOUBLE             dbPosition[NC_MAX_NUM_AXES_IN_NODE];
-    MC_COORD_SYSTEM_ENUM    eCordSystem;
-    MC_BUFFERED_MODE_ENUM   eBufferMode;
-    MC_EXECUTION_MODE       eExecutionMode;
-    ELMO_UINT8              ucExecute;
-    ELMO_UINT8              ucMode;
+	ELMO_DOUBLE 			dbPosition[NC_MAX_NUM_AXES_IN_NODE];
+	MC_COORD_SYSTEM_ENUM 	eCordSystem;
+	MC_BUFFERED_MODE_ENUM 	eBufferMode;
+	MC_EXECUTION_MODE 		eExecutionMode;
+	ELMO_UINT8 				ucExecute;
+	ELMO_UINT8 				ucMode;
 } MMC_GROUPSETPOSITION_IN;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1268,7 +1272,7 @@ typedef struct
 /// \brief Group Read Status Command input data structure.
 ///
 /// (See : " Technical Paper
-///     PLCopen Technical Committee 2 ?Task Force
+///     PLCopen Technical Committee 2 – Task Force
 ///     Function Blocks for motion control:
 ///     Part 4 –Coordinated Motion")
 ///////////////////////////////////////////////////////////////////////////////
@@ -1284,12 +1288,20 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_ULINT32            ulState;        ///< Group current state.
+    uint32_t                ulState;        ///< Group current state.
     ELMO_UINT16             usStatus;       ///< Returned command status.
     ELMO_INT16              usErrorID;      ///< Returned command error ID.
     ELMO_UINT16             usGroupErrorID; ///< Group error ID.
 } MMC_GROUPREADSTATUS_OUT;
 
+typedef struct
+{
+	ELMO_DOUBLE dVelFactor;					///< New override factor for the velocity
+	ELMO_DOUBLE dAccFactor;					///< New override factor for the acceleration/deceleration
+	ELMO_DOUBLE dJerkFactor;				///< New override factor for the jerk
+	ELMO_UINT16 usUpdateVelFactorIdx;		///< Index of changed velocity factor. Vendor defined. (range from 1 till 3)
+	ELMO_UINT8  ucEnable;					///< If SET, it writes the value of the override factor continuously. If RESET it should keep the last value.
+}MMC_SETOVERRIDEEX_IN;
 ///////////////////////////////////////////////////////////////////////////////
 /// \struct MMC_SETOVERRIDE_IN
 /// \brief Set Override Command input data structure.
@@ -1323,7 +1335,7 @@ typedef struct
 /// \brief Move Linear Relative Command input data structure.
 ///
 /// (See : " Technical Paper
-///     PLCopen Technical Committee 2 ?Task Force
+///     PLCopen Technical Committee 2 – Task Force
 ///     Function Blocks for motion control:
 ///     Part 4 –Coordinated Motion")
 ///////////////////////////////////////////////////////////////////////////////
@@ -1388,7 +1400,7 @@ typedef struct mmc_movealinearrelativeex_out
 /// \brief Move Linear Absolute Command input data structure.
 ///
 /// (See : " Technical Paper
-///     PLCopen Technical Committee 2 ?Task Force
+///     PLCopen Technical Committee 2 – Task Force
 ///     Function Blocks for motion control:
 ///     Part 4 –Coordinated Motion")
 ///////////////////////////////////////////////////////////////////////////////
@@ -1570,7 +1582,7 @@ typedef struct mmc_group_halt_out
 }MMC_GROUPHALT_OUT;
 
 typedef struct {
-    ELMO_ULINT32            ulStatus;
+    uint32_t                ulStatus;
     ELMO_DOUBLE             aPos[NC_MAX_NUM_AXES_IN_NODE];
     ELMO_DOUBLE             aVel[NC_MAX_NUM_AXES_IN_NODE];
     ELMO_DOUBLE             aACDC[NC_MAX_NUM_AXES_IN_NODE];
@@ -2031,52 +2043,48 @@ MMC_LIB_API ELMO_INT32 MMC_SetCartesianTransform(
 		IN MMC_SETCARTESIANTRANSFORM_IN* pInParam,
 		OUT MMC_SETCARTESIANTRANSFORM_OUT* pOutParam);
 
-////////////////////////////////////////////////////////////////////////////////
-/// \fn int MMC_TrackRotaryTable(
-///				IN MMC_CONNECT_HNDL hConn,
-///				IN MMC_AXIS_REF_HNDL hAxisRef,
-///				IN MMC_TRACKROTARYTABLE_IN* pInParam,
-/// 			OUT MMC_TRACKCONVEYORBELT_OUT* o_params)
-///	\brief this function implements a ramp process (MCS to PCS).
-/// \param  hAxisRef - [IN] Axis Reference handle
-/// \param  pInParam - [IN] Pointer to Set Cartesian Transform input parameters
-/// \param  pOutParam - [OUT] Pointer to Set Cartesian Transform output parameters
-/// \return	return - 0 if success
-/// 				 error_id in case of error
-////////////////////////////////////////////////////////////////////////////////
+/**
+ *  \fn int MMC_TrackRotaryTable(
+ *  			IN MMC_CONNECT_HNDL hConn,
+ *  			IN MMC_AXIS_REF_HNDL hAxisRef,
+ *  			IN MMC_TRACKROTARYTABLE_IN* i_params,
+ *  			OUT MMC_TRACKROTARYTABLE_OUT* o_params)
+ *	\brief this function implements a ramp process (MCS to PCS).
+ *	\param  hConn - [IN] connection handle
+ *	\param  i_params - [IN] pointer to input parameters
+ *	\param  o_params - [OUT] pointer to output parameters
+ *	\return	0 if success, otherwise an error.
+ */
 MMC_LIB_API ELMO_INT32 MMC_TrackRotaryTable(
 		IN MMC_CONNECT_HNDL hConn,
 		IN MMC_AXIS_REF_HNDL hAxisRef,
 		IN MMC_TRACKROTARYTABLE_IN* pInParam,
 		OUT MMC_TRACKROTARYTABLE_OUT* pOutParam);
 
-
-////////////////////////////////////////////////////////////////////////////////
-/// \fn int MMC_TrackConveyorBelt(
-///				IN MMC_CONNECT_HNDL hConn,
-///				IN MMC_AXIS_REF_HNDL hAxisRef,
-///				IN MMC_TRACKCONVEYORBELT_IN* pInParam,
-///  			OUT MMC_TRACKROTARYTABLE_OUT* o_params)
-///	\brief this function implements a ramp process (MCS to PCS).
-/// \param  hAxisRef - [IN] Axis Reference handle
-/// \param  pInParam - [IN] Pointer to Set Cartesian Transform input parameters
-/// \param  pOutParam - [OUT] Pointer to Set Cartesian Transform output parameters
-/// \return	return - 0 if success
-/// 				 error_id in case of error
-////////////////////////////////////////////////////////////////////////////////
+/**
+*  \fn int MMC_TrackConveyorBelt(
+*  			IN MMC_CONNECT_HNDL hConn,
+*  			IN MMC_AXIS_REF_HNDL hAxisRef,
+*  			IN MMC_TRACKCONVEYORBELT_IN* i_params,
+*  			OUT MMC_TRACKCONVEYORBELT_OUT* o_params)
+*	\brief this function implements a ramp process (MCS to PCS).
+*	\param  hConn - [IN] connection handle
+*	\param  pi_params - [IN] pointer to input parameters
+*	\param  po_params - [OUT] pointer to output parameters
+*	\return	0 if success, otherwise an error.
+*/
 MMC_LIB_API ELMO_INT32 MMC_TrackConveyorBelt(
 		IN MMC_CONNECT_HNDL hConn,
 		IN MMC_AXIS_REF_HNDL hAxisRef,
-		IN MMC_TRACKCONVEYORBELT_IN* pInParam,
-		OUT MMC_TRACKCONVEYORBELT_OUT* pOutParam);
-
-
+		IN MMC_TRACKCONVEYORBELT_IN* pi_params,
+		OUT MMC_TRACKCONVEYORBELT_OUT* po_params);
 
 /**
 *  \fn int MMC_TrackSyncOut(
 *  			IN MMC_CONNECT_HNDL hConn,
 *  			IN MMC_AXIS_REF_HNDL hAxisRef,
 *  			IN MMC_TRACKSYNCOUT_IN* i_params,
+*  			OUT MMC_TRACKSYNCOUT_OUT* o_params)
 *	\brief this function implements a ramp out process (PCS to MCS).
 *	\param  hConn - [IN] connection handle
 *	\param  pi_params - [IN] pointer to input parameters
@@ -2143,11 +2151,10 @@ MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteCmd(
 /// \return return - 0 if success
 ///                  error_id in case of error
 ////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteExCmd(
-        IN  MMC_CONNECT_HNDL                hConn,
-        IN  MMC_AXIS_REF_HNDL               hAxisRef,
-        IN  MMC_MOVECIRCULARABSOLUTEEX_IN*  pInParam,
-        OUT MMC_MOVECIRCULARABSOLUTEEX_OUT* pOutParam);
+MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteExCmd(IN MMC_CONNECT_HNDL hConn,
+											IN MMC_AXIS_REF_HNDL hAxisRef,
+											IN MMC_MOVECIRCULARABSOLUTEEX_IN* pInParam,
+											OUT MMC_MOVECIRCULARABSOLUTEEX_OUT* pOutParam);
 ////////////////////////////////////////////////////////////////////////////////
 /// \fn int MMC_MoveCircularAbsoluteCenterCmd(
 ///             IN MMC_CONNECT_HNDL hConn,
@@ -2187,11 +2194,10 @@ MMC_LIB_API int MMC_MoveAngle(IN MMC_CONNECT_HNDL hConn,
 /// \return return - 0 if success
 ///                  error_id in case of error
 ////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteCenterExCmd(
-        IN  MMC_CONNECT_HNDL                    hConn,
-        IN  MMC_AXIS_REF_HNDL                   hAxisRef,
-        IN  MMC_MOVECIRCULARABSOLUTECENTEREX_IN* pInParam,
-        OUT MMC_MOVECIRCULARABSOLUTEEX_OUT*     pOutParam);
+MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteCenterExCmd(IN MMC_CONNECT_HNDL hConn,
+													IN MMC_AXIS_REF_HNDL hAxisRef,
+													IN MMC_MOVECIRCULARABSOLUTECENTEREX_IN* pInParam,
+													OUT MMC_MOVECIRCULARABSOLUTEEX_OUT* pOutParam);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \fn int MMC_MoveCircularAbsoluteBorderCmd(
@@ -2227,8 +2233,7 @@ MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteBorderCmd(
 /// \return return - 0 if success
 ///                  error_id in case of error
 ////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteBorderExCmd(
-        IN  MMC_CONNECT_HNDL                    hConn,
+MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteBorderExCmd(IN  MMC_CONNECT_HNDL hConn,
         IN  MMC_AXIS_REF_HNDL                   hAxisRef,
         IN  MMC_MOVECIRCULARABSOLUTEBORDEREX_IN* pInParam,
         OUT MMC_MOVECIRCULARABSOLUTEEX_OUT*     pOutParam);
@@ -2268,8 +2273,7 @@ MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteRadiusCmd(
 /// \return return - 0 if success
 ///                  error_id in case of error
 ////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteRadiusExCmd(
-        IN  MMC_CONNECT_HNDL                    hConn,
+MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteRadiusExCmd(IN  MMC_CONNECT_HNDL hConn,
         IN  MMC_AXIS_REF_HNDL                   hAxisRef,
         IN  MMC_MOVECIRCULARABSOLUTERADIUSEX_IN* pInParam,
         OUT MMC_MOVECIRCULARABSOLUTEEX_OUT*     pOutParam);
@@ -2287,8 +2291,7 @@ MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteRadiusExCmd(
 /// \return return - 0 if success
 ///                  error_id in case of error
 ////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteAngleCmd(
-        IN  MMC_CONNECT_HNDL                    hConn,
+MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteAngleCmd(IN  MMC_CONNECT_HNDL hConn,
         IN  MMC_AXIS_REF_HNDL                   hAxisRef,
         IN  MMC_MOVECIRCULARABSOLUTEANGLE_IN*   pInParam,
         OUT MMC_MOVECIRCULARABSOLUTE_OUT*       pOutParam);
@@ -2307,8 +2310,7 @@ MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteAngleCmd(
 /// \return return - 0 if success
 ///                  error_id in case of error
 ////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteAngleExCmd(
-        IN  MMC_CONNECT_HNDL                    hConn,
+MMC_LIB_API ELMO_INT32 MMC_MoveCircularAbsoluteAngleExCmd(IN  MMC_CONNECT_HNDL hConn,
         IN  MMC_AXIS_REF_HNDL                   hAxisRef,
         IN  MMC_MOVECIRCULARABSOLUTEANGLEEX_IN* pInParam,
         OUT MMC_MOVECIRCULARABSOLUTEEX_OUT*     pOutParam);
@@ -2332,6 +2334,26 @@ MMC_LIB_API ELMO_INT32 MMC_GroupSetOverrideCmd(
         IN  MMC_AXIS_REF_HNDL       hAxisRef,
         IN  MMC_SETOVERRIDE_IN*     pInParam,
         OUT MMC_SETOVERRIDE_OUT*    pOutParam);
+//@UM 25.02.2020
+////////////////////////////////////////////////////////////////////////////////
+/// \fn int MMC_GroupSetOverrideCmdEx(
+///				IN MMC_CONNECT_HNDL hConn,
+///				IN MMC_AXIS_REF_HNDL hAxisRef,
+///				IN MMC_SETOVERRIDEEX_IN* pInParam,
+///				OUT MMC_SETOVERRIDE_OUT* pOutParam)
+/// \brief This function  send Group Set Override command to MMC server for specific Group.
+/// \param  hConn - [IN] Connection handle
+/// \param  hAxisRef - [IN] Group Reference handle
+/// \param  pInParam - [IN] Pointer to Set Override input parameters
+/// \param  pOutParam - [OUT] Pointer to Set Override output parameters
+/// \return	return - 0 if success
+/// 				 error_id in case of error
+////////////////////////////////////////////////////////////////////////////////
+MMC_LIB_API ELMO_INT32 MMC_GroupSetOverrideCmdEx(
+	IN MMC_CONNECT_HNDL hConn,
+	IN MMC_AXIS_REF_HNDL hAxisRef,
+	IN MMC_SETOVERRIDEEX_IN* pInParam,
+	OUT MMC_SETOVERRIDE_OUT* pOutParam);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \fn int MMC_MoveLinearAbsoluteCmd(
@@ -2366,8 +2388,7 @@ MMC_LIB_API ELMO_INT32 MMC_MoveLinearAbsoluteCmd(
 /// \return return - 0 if success
 ///                  error_id in case of error
 ////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_MoveLinearAbsoluteExCmd(
-        IN  MMC_CONNECT_HNDL            	hConn,
+MMC_LIB_API ELMO_INT32 MMC_MoveLinearAbsoluteExCmd(IN  MMC_CONNECT_HNDL hConn,
         IN  MMC_AXIS_REF_HNDL           	hAxisRef,
         IN  MMC_MOVELINEARABSOLUTEEX_IN* 	pInParam,
         OUT MMC_MOVELINEARABSOLUTEEX_OUT* 	pOutParam);
@@ -2406,8 +2427,7 @@ MMC_LIB_API ELMO_INT32 MMC_MoveLinearRelativeCmd(
 /// \return return - 0 if success
 ///                  error_id in case of error
 ////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_MoveLinearRelativeExCmd(
-        IN  MMC_CONNECT_HNDL                hConn,
+MMC_LIB_API ELMO_INT32 MMC_MoveLinearRelativeExCmd(IN  MMC_CONNECT_HNDL hConn,
         IN  MMC_AXIS_REF_HNDL               hAxisRef,
         IN  MMC_MOVELINEARRELATIVEEX_IN*    pInParam,
         OUT MMC_MOVELINEARRELATIVEEX_OUT*   pOutParam);
@@ -2707,8 +2727,7 @@ MMC_LIB_API ELMO_INT32 MMC_MoveLinearAbsoluteRepetitiveExCmd(
 /// \return return - 0 if success
 ///                  error_id in case of error
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_MoveLinearRelativeRepetitiveCmd(
-        IN  MMC_CONNECT_HNDL                        hConn,
+MMC_LIB_API ELMO_INT32 MMC_MoveLinearRelativeRepetitiveCmd(IN  MMC_CONNECT_HNDL hConn,
         IN  MMC_AXIS_REF_HNDL                       hAxisRef,
         IN  MMC_MOVELINEARRELATIVEREPETITIVE_IN*    pInParam,
         OUT MMC_MOVELINEARRELATIVEREPETITIVE_OUT*   pOutParam);
@@ -2726,8 +2745,7 @@ MMC_LIB_API ELMO_INT32 MMC_MoveLinearRelativeRepetitiveCmd(
 /// \return return - 0 if success
 ///                  error_id in case of error
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_MoveLinearRelativeRepetitiveExCmd(
-        IN  MMC_CONNECT_HNDL                        hConn,
+MMC_LIB_API ELMO_INT32 MMC_MoveLinearRelativeRepetitiveExCmd(IN  MMC_CONNECT_HNDL hConn,
         IN  MMC_AXIS_REF_HNDL                       hAxisRef,
         IN  MMC_MOVELINEARRELATIVEREPETITIVEEX_IN*  pInParam,
         OUT MMC_MOVELINEARRELATIVEREPETITIVEEX_OUT* pOutParam);
@@ -2746,8 +2764,7 @@ MMC_LIB_API ELMO_INT32 MMC_MoveLinearRelativeRepetitiveExCmd(
 /// \return return - 0 if success
 ///                  error_id in case of error
 /////////////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_PathSelectCmd(
-        IN  MMC_CONNECT_HNDL            hConn,
+MMC_LIB_API ELMO_INT32 MMC_PathSelectCmd(IN  MMC_CONNECT_HNDL hConn,
         IN  MMC_AXIS_REF_HNDL           hAxisRef,
         IN  MMC_PATHSELECT_IN*          pInParam,
         OUT MMC_PATHSELECT_OUT*         pOutParam);
@@ -2770,12 +2787,10 @@ MMC_LIB_API ELMO_INT32 MMC_PathGetLengthsCmd(IN MMC_CONNECT_HNDL hConn,
 /// \return return - 0 if success
 ///                  error_id in case of error
 /////////////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_MovePathCmd(
-        IN  MMC_CONNECT_HNDL            hConn,
+MMC_LIB_API ELMO_INT32 MMC_MovePathCmd(IN  MMC_CONNECT_HNDL hConn,
         IN  MMC_AXIS_REF_HNDL           hAxisRef,
         IN  MMC_MOVEPATH_IN*            pInParam,
         OUT MMC_MOVEPATH_OUT*           pOutParam);
-
 /**
  * \fn  void mmc_pathgetlengths(void args)
  * \brief   this method retrieves a list of lengths for a range of spline segments.
@@ -2803,22 +2818,19 @@ MMC_LIB_API ELMO_INT32 MMC_PathGetLengthsCmd(IN MMC_CONNECT_HNDL hConn,
 /// \return return - 0 if success
 ///                  error_id in case of error
 /////////////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_PathUnselectCmd(
-        IN  MMC_CONNECT_HNDL            hConn,
+MMC_LIB_API ELMO_INT32 MMC_PathUnselectCmd(IN  MMC_CONNECT_HNDL hConn,
         IN  MMC_AXIS_REF_HNDL           hAxisRef,
         IN  MMC_PATHUNSELECT_IN*        pInParam,
         OUT MMC_PATHUNSELECT_OUT*       pOutParam);
 
 /////////////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API ELMO_INT32 MMC_MoveLinearAdditiveCmd(
-        IN  MMC_CONNECT_HNDL            hConn,
+MMC_LIB_API ELMO_INT32 MMC_MoveLinearAdditiveCmd(IN  MMC_CONNECT_HNDL hConn,
         IN  MMC_AXIS_REF_HNDL           hAxisRef,
         IN  MMC_MOVELINEARADDITIVE_IN*  pInParam,
         OUT MMC_MOVELINEARADDITIVE_OUT* pOutParam);
 
 
-MMC_LIB_API ELMO_INT32 MMC_MoveLinearAdditiveExCmd(
-        IN  MMC_CONNECT_HNDL            hConn,
+MMC_LIB_API ELMO_INT32 MMC_MoveLinearAdditiveExCmd(IN  MMC_CONNECT_HNDL hConn,
         IN  MMC_AXIS_REF_HNDL           hAxisRef,
         IN  MMC_MOVELINEARADDITIVEEX_IN* pInParam,
         OUT MMC_MOVELINEARADDITIVEEX_OUT* pOutParam);
@@ -2879,10 +2891,8 @@ typedef struct _mc_kintransform_dualhead {
 	MC_KIN_REF_DUAL_HEAD		stParams;
 	MC_BUFFERED_MODE_ENUM eBufferMode;
 	ELMO_UINT8 ucExecute;
-} MMC_KINTRANSFORM_DUALHEAD_IN;
-typedef MMC_SETKINTRANSFORMEX_OUT MMC_KINTRANSFORM_DUALHEAD_OUT;
-
-//~~~~~~~~~~~~~~~
+	} MMC_KINTRANSFORM_DUALHEAD_IN;
+	typedef MMC_SETKINTRANSFORMEX_OUT MMC_KINTRANSFORM_DUALHEAD_OUT;
 
 
 /*!
@@ -2903,10 +2913,10 @@ typedef MMC_SETKINTRANSFORMEX_OUT MMC_KINTRANSFORM_HXPD_OUT;
 
 typedef struct motioninfodata
 {
-    double dFBUserData;
-    double dFirstLineToVertexLength;
-    double dSecondLineToVertexLength;
-    double dTranstionLength;
+    ELMO_DOUBLE dFBUserData;
+    ELMO_DOUBLE dFirstLineToVertexLength;
+    ELMO_DOUBLE dSecondLineToVertexLength;
+    ELMO_DOUBLE dTranstionLength;
 }MOTION_INFO_DATA;
 
 typedef union
@@ -3102,7 +3112,7 @@ MMC_LIB_API ELMO_INT32 MMC_GroupReadTargetPosition(
         OUT MMC_GROUPREADTARGETPOSITION_OUT* o_params);
 
 
-/*
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * user units support
  */
 /*! \fn void MMC_SetKinTransformDeltaUU(MMC_CONNECT_HNDL, MMC_AXIS_REF_HNDL, POSITION_UU_TYPE_ENUM, POSITION_UU_TYPE_ENUM, MMC_KINTRANSFORM_DELTA_IN*, MMC_KINTRANSFORM_DELTA_OUT*)

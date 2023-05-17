@@ -17,7 +17,7 @@
     #include <stropts.h>
 // ????? Really Necessary ?????
     
-    
+
     #include "MMC_definitions.h"
     
     #include "MMCAxis.hpp"

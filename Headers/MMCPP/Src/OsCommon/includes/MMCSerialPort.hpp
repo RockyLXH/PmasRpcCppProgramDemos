@@ -173,22 +173,22 @@ private:
 
 struct SMaestroSerialPortStat {
     // statistics
-    ELMO_UINT16 tx_packets;
-    ELMO_UINT16 tx_dropped;
-    ELMO_UINT16 rx_packets;
-    ELMO_UINT16 rx_dropped;
-    ELMO_UINT16 rx_resync;
-    ELMO_UINT16 rx_skipped;
+    uint32_t tx_packets;
+    uint32_t tx_dropped;
+    uint32_t rx_packets;
+    uint32_t rx_dropped;
+    uint32_t rx_resync;
+    uint32_t rx_skipped;
     // state
-    ELMO_UINT16 speed;
-    ELMO_UINT16 ts_format;
-    ELMO_UINT16 rx_packet_len;
-    ELMO_UINT16 blocking_mode;
-    ELMO_UINT16 rx_dma_burst;
-    ELMO_UINT16 rx_fifo_trig;
-    ELMO_UINT16 tx_cpu;
-    ELMO_UINT16 rx_cpu;
-    ELMO_UINT16 kern_log_level;
+    uint32_t speed;
+    uint32_t ts_format;
+    uint32_t rx_packet_len;
+    uint32_t blocking_mode;
+    uint32_t rx_dma_burst;
+    uint32_t rx_fifo_trig;
+    uint32_t tx_cpu;
+    uint32_t rx_cpu;
+    uint32_t kern_log_level;
 };
 
 

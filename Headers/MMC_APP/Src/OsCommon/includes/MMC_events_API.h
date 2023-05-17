@@ -6,6 +6,7 @@
 /// Version     : 0.0.1
 ///               0.2.0 Updated 20Jan2015 Haim H. native Data Types (names), for supporting 64B OS.
 ///               0.2.2 Updated 16Nov2020 Haim H. Add define for AMS events
+///               0.4.3 Updated 20Apr2021 Haim H. Updates according to update in "Gen C lib in Plastic"
 /// Copyright   : Your copyright notice
 /// Description : This file contain definitions for ...
 ////////////////////////////////////////////////////////////////////////////////
@@ -215,9 +216,9 @@ typedef struct mmc_insnotificationfb_in
     ELMO_UINT16                     usSourceAxisRefernce;
     ELMO_INT32                      iParameterID;
     ELMO_INT32                      iParameterIndex;
-    ELMO_DOUBLE                      dbReferenceValue;
+    ELMO_DOUBLE                     dbReferenceValue;
     MC_CONDITIONFB_OPERATION_TYPE   eOperationType;
-    ELMO_LINT32                     lSpare[2];
+    int32_t		                    lSpare[2];
 }MMC_INSNOTIFICATIONFB_IN;
 
 typedef struct mmc_insnotificationfb_out

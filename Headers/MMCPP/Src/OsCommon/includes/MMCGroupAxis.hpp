@@ -480,9 +480,10 @@ public:
     
 
     ELMO_INT32   GroupSetOverride(ELMO_FLOAT fVelFactor,  ELMO_FLOAT fAccFactor, ELMO_FLOAT fJerkFactor, ELMO_UINT16 usUpdateVelFactorIdx) throw (CMMCException);
+	ELMO_INT32   GroupSetOverrideEx(ELMO_DOUBLE dVelFactor, ELMO_DOUBLE dAccFactor, ELMO_DOUBLE dJerkFactor, ELMO_UINT16 usUpdateVelFactorIdx) throw (CMMCException); //@UM
     ELMO_INT32   GroupSetPosition(ELMO_DOUBLE dbPosition[], MC_COORD_SYSTEM_ENUM eCoordSystem, ELMO_UINT8 ucMode, MC_BUFFERED_MODE_ENUM eBufferMode = MC_ABORTING_MODE) throw (CMMCException);
-    ELMO_ULINT32 GroupReadStatus(ELMO_UINT16& usGroupErrorID) throw (CMMCException);
-    ELMO_ULINT32 GroupReadStatus() throw (CMMCException);
+    uint32_t     GroupReadStatus(ELMO_UINT16& usGroupErrorID) throw (CMMCException);
+    uint32_t     GroupReadStatus() throw (CMMCException);
     void                GroupEnable()  throw (CMMCException);
     void                GroupDisable() throw (CMMCException);
     void                GroupReset()   throw (CMMCException);
@@ -515,9 +516,9 @@ public:
                     ELMO_UINT32  uiNumOfSegments,
                     ELMO_PDOUBLE dbValues) throw (CMMCException);
 
-    void SetBoolParameter(ELMO_LINT32 lValue, MMC_PARAMETER_LIST_ENUM eNumber, ELMO_INT32 iIndex) throw (CMMCException);
+    void SetBoolParameter(int32_t lValue, MMC_PARAMETER_LIST_ENUM eNumber, ELMO_INT32 iIndex) throw (CMMCException);
     void SetParameter(ELMO_DOUBLE dbValue, MMC_PARAMETER_LIST_ENUM eNumber, ELMO_INT32 iIndex) throw (CMMCException);
-    ELMO_LINT32 GetBoolParameter(MMC_PARAMETER_LIST_ENUM eNumber, ELMO_INT32 iIndex) throw (CMMCException);
+    int32_t GetBoolParameter(MMC_PARAMETER_LIST_ENUM eNumber, ELMO_INT32 iIndex) throw (CMMCException);
     ELMO_DOUBLE GetParameter(MMC_PARAMETER_LIST_ENUM eNumber, ELMO_INT32 iIndex) throw (CMMCException);
 
     void GetMembersInfo(MMC_GETGROUPMEMBERSINFO_OUT* stOutput) throw (CMMCException);
@@ -552,8 +553,8 @@ public:
 
 
     void                Reset()throw (CMMCException){GroupReset();}
-    ELMO_ULINT32 ReadStatus()throw (CMMCException){return GroupReadStatus();}
-    ELMO_ULINT32 ReadStatus(ELMO_UINT16& usAxisErrorID, ELMO_UINT16& usStatusWord)throw (CMMCException){return GroupReadStatus(usAxisErrorID);}
+    uint32_t ReadStatus()throw (CMMCException){return GroupReadStatus();}
+    uint32_t ReadStatus(ELMO_UINT16& usAxisErrorID, ELMO_UINT16& usStatusWord)throw (CMMCException){return GroupReadStatus(usAxisErrorID);}
 
         /*
          * wrappers for kinematics's transformation API
@@ -631,16 +632,14 @@ public:
 		*	\return 0 if completed successfully, otherwise error or throws CMMCException.
 		*/
 		ELMO_INT32 SetKinTransformHxpd(MMC_KINTRANSFORM_HXPD_IN& i_params, ELMO_UINT8 ucLinearUU=0, ELMO_UINT8 ucRotaryUU=0)  throw (CMMCException);
-
-		/*! \fn void SetKinTransformDualHead(NC_DUAL_HEAD_TYPE& i_params, unsigned char ucLinearUU, unsigned char ucRotaryUU)
-		*	\brief sets kinematic transformation parameters (MSC to ACS) for dual head robot using selected user units.
-		*	\param i_params reference of data structure with kinematic parameters.
-		*	\param ucRotaryUU rotary selected user unit (radians, degrees, miliradians. default is no conversion).
-		*	\param ucLinearUU linear selected user unit (millimeters, micrometers, nanometers. default is no conversion)
-		*	\return 0 if completed successfully, otherwise error or throws CMMCException.
-		*/
-		ELMO_INT32 SetKinTransformDualHead(MMC_KINTRANSFORM_DUALHEAD_IN& i_params, ELMO_UINT8 ucLinearUU, ELMO_UINT8 ucRotaryUU) throw (CMMCException);
-
+	/*! \fn void SetKinTransformDualHead(NC_DUAL_HEAD_TYPE& i_params, unsigned char ucLinearUU, unsigned char ucRotaryUU)
+	*	\brief sets kinematic transformation parameters (MSC to ACS) for dual head robot using selected user units.
+	*	\param i_params reference of data structure with kinematic parameters.
+	*	\param ucRotaryUU rotary selected user unit (radians, degrees, miliradians. default is no conversion).
+	*	\param ucLinearUU linear selected user unit (millimeters, micrometers, nanometers. default is no conversion)
+	*	\return 0 if completed successfully, otherwise error or throws CMMCException.
+	*/
+	    ELMO_INT32 SetKinTransformDualHead(MMC_KINTRANSFORM_DUALHEAD_IN& i_params, ELMO_UINT8 ucLinearUU, ELMO_UINT8 ucRotaryUU) throw (CMMCException);
 
         /*! \fn void ReadKinTransform((MMC_READKINTRANSFORMEX_OUT& stOutParam)
         *       \brief This function get group's kinematic transformation parameter.
@@ -658,8 +657,7 @@ public:
         
         void GetMotionInfo(MMC_MOTIONINFO_OUT& stMotionInfoOut) throw (CMMCException);
 
-        // void SetDualHeadCartesianKinematics(MC_DUAL_HEAD_SET& stInputDualRef) throw (CMMCException);
-		// ELMO_INT32 SetDualHeadCartesianKinematics(MMC_KINTRANSFORM_DUALHEAD_IN& i_params, ELMO_UINT8 ucLinearUU = 0, ELMO_UINT8 ucRotaryUU = 0) throw (CMMCException);
+        void SetDualHeadCartesianKinematics(MC_DUAL_HEAD_SET& stInputDualRef) throw (CMMCException);
 
 private:
     void CopyMoveCircularAbsParams(MMC_MOVECIRCULARABSOLUTE_IN& stInParams);
@@ -674,10 +672,10 @@ private:
     void CopyMoveLinearAddParams(MMC_MOVELINEARADDITIVE_IN& stInParams);
     void CopyMovePolynomAbsParams(MMC_MOVEPOLYNOMABSOLUTE_IN& stInParams);
 
-    void SendSdoCmd(ELMO_LINT32 lData,
+    void SendSdoCmd(int32_t lData,
             ELMO_UINT8   ucService,
             ELMO_UINT8   ucSubIndex,
-            ELMO_ULINT32 ulDataLength,
+            uint32_t     ulDataLength,
             ELMO_UINT16  usIndex,
             ELMO_UINT16  usSlaveID)throw (CMMCException){return;}
                         
@@ -702,20 +700,20 @@ private:
                 ELMO_UINT8  ucSubIndex,
                 ELMO_UINT8  ucDataLength)throw (CMMCException) {return;}
 
-    void SendSdoDownload(ELMO_LINT32 lData,
+    void SendSdoDownload(int32_t lData,
             ELMO_UINT8   ucSubIndex,
-            ELMO_ULINT32 ulDataLength,
+            uint32_t     ulDataLength,
             ELMO_UINT16  usIndex,
             ELMO_UINT16  usSlaveID)throw (CMMCException){return;}
-    ELMO_LINT32 SendSdoUpload(ELMO_UINT8 ucSubIndex,
-            ELMO_ULINT32 ulDataLength,
+    int32_t SendSdoUpload(ELMO_UINT8 ucSubIndex,
+            uint32_t     ulDataLength,
             ELMO_UINT16  usIndex,
             ELMO_UINT16  usSlaveID)throw (CMMCException){return 0;}
     void SendSdoUploadAsync(ELMO_UINT8 ucSubIndex,
-            ELMO_ULINT32 ulDataLength,
+            uint32_t     ulDataLength,
             ELMO_UINT16  usIndex,
             ELMO_UINT16  usSlaveID)throw (CMMCException){return;}
-    void RetreiveSdoUploadAsync(ELMO_LINT32 & lData)throw (CMMCException){return;}
+    void RetreiveSdoUploadAsync(int32_t& lData)throw (CMMCException){return;}
     MMCPPULL_T PDOGeneralRead(ELMO_UINT8 ucParam)throw (CMMCException){return 0;}
     void PDOGeneralWrite(ELMO_UINT8 ucParam,MMCPPULL_T ulliVal)throw (CMMCException){return;}
     void PDOGeneralWrite(ELMO_UINT8 ucParam,unGeneralPDOWriteData DataUnion)throw (CMMCException){return;}

@@ -7,6 +7,7 @@
 ///               0.2.0 Updated 20Jan2015 Haim H. native Data Types (names), for supporting 64B OS.
 ///               0.4.0 Updated 11Sep2017 Haim H.
 ///               0.4.2 Updated 26Aug2019 Haim H.
+///               0.4.3 Updated 20Apr2021 Haim H. Add 'ucPause;' to MMC_IF_STRUCT
 /// Copyright   : Your copyright notice
 /// Description : This file contain GMAS LINUX IPC Operating System Platform dependencies code.
 ///               The file is selected to be including in OS_Platform.h in case target select to be LINUX IPC.
@@ -23,7 +24,7 @@
     #include <sys/socket.h>
     #include <sys/sem.h>
     #include <sys/time.h>
-    #include <sys/ioctl.h>
+//    #include <sys/ioctl.h>
     #include <sys/wait.h>
     #include <netinet/in.h>
     #include <netinet/tcp.h>
@@ -188,6 +189,8 @@
         RPC_HANDLER *               pIECExeuteCmd;
         pthread_mutex_t *           connection_lock;
         ELMO_INT8                   dest_ip[IP_ADDR_SIZE+1];    /* Dest ip for rpc calls*/
+
+		ELMO_UINT8 					ucPause;		 /*!< aflag for IEC connection. active(0), pause(1). 2YL 20210303*/
 
     } MMC_IF_STRUCT;
 

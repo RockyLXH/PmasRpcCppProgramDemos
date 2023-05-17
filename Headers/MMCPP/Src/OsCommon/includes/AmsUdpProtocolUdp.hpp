@@ -66,7 +66,7 @@
   ELMO_INT32 Send_UDP(ELMO_PVOID pData, ELMO_UINT16 usSize, sockaddr_in* pSockaddr=NULL) throw (CMMCException);
 
   //int inline Connect_UDP(char * cIP, int iPort) {return Create(cIP, iPort);}
-  ELMO_INT32 Connect_UDP(ELMO_INT8 szAddr, ELMO_UINT16 usPort, ELMO_BOOL& bWait, ELMO_INT32 iMsgMaxSize=AMS_MAX_SIZE_DEF_UDP) throw (CMMCException);
+  ELMO_INT32 Connect_UDP(ELMO_PINT8 szAddr, ELMO_UINT16 usPort, ELMO_BOOL& bWait, ELMO_INT32 iMsgMaxSize=AMS_MAX_SIZE_DEF_UDP) throw (CMMCException);
 
   /**! \fn int IsReady_UDP();
    * \brief checks for errors and whether or not UDP connection is ready for read operation.
@@ -116,7 +116,7 @@
       * \return   return - 0 on success, otherwise throws CMMCException or none zero error..
       */
       ELMO_INT32 SetSocketTimeout(ELMO_INT32 iMilliseconds);
-      friend ELMO_PVOID fnUDPClbkThread(ELMO_PVOID);	//call-back argument for pthread_create within RunClbkThread.
+      friend ELMO_PVOID fnAmsUDPClbkThread(ELMO_PVOID);	//call-back argument for pthread_create within RunClbkThread.
       ELMO_INT32 RunClbkThread();                    	//launches the call-back thread for call-back mode of operation.
       void ClbkThread();                      //the actual implementation of call-back mode of operation.
 

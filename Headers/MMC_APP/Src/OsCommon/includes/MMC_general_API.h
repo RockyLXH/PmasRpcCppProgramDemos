@@ -9,6 +9,7 @@
 ///               0.4.0 Updated 11Sep2017 Haim H.
 ///               0.4.2 Updated 26Aug2019 Haim H.
 ///               0.4.4 Updated 16Nov2020 Haim H.
+///               0.4.5 Updated 20Apr2021 Haim H. Update according updates in "Gen C lib in Plastic"
 /// Copyright   : Your copyright notice
 /// Description : This file contain definitions for ...
 ////////////////////////////////////////////////////////////////////////////////
@@ -821,39 +822,68 @@ typedef enum {
 	MMC_MAX_LIMIT_STOP_JERK_ROT 				= 311,  //@YL & @IR - 17.03.2019 - Added Enhanced User Units support - GEN-100
 	MMC_MAX_ERROR_STOP_DECELERATION_ROT 		= 312,  //@YL & @IR - 17.03.2019 - Added Enhanced User Units support - GEN-100
 	MMC_MAX_ERROR_STOP_JERK_ROT 				= 313,  //@YL & @IR - 17.03.2019 - Added Enhanced User Units support - GEN-100
-    MMC_CPLD_EMULATION3_INT_ARR				= 314,
+	MMC_CPLD_EMULATION3_INT_ARR					= 314,
 	MMC_CPLD_EMULATION3_DOUBLE_ARR			= 315,
-	MMC_CPLD_EMULATION4_INT_ARR = 316,
-	MMC_CPLD_EMULATION4_DOUBLE_ARR = 317,
-	MMC_CPLD_EMULATION5_INT_ARR = 318,
-	MMC_CPLD_EMULATION5_DOUBLE_ARR = 319,
-	MMC_CPLD_EMULATION6_INT_ARR = 320,
-	MMC_CPLD_EMULATION6_DOUBLE_ARR = 321,
-	MMC_CPLD_EMULATION_3_STATUS = 322,
-	MMC_CPLD_EMULATION_4_STATUS = 323,
-	MMC_CPLD_EMULATION_5_STATUS = 324,
-	MMC_CPLD_EMULATION_6_STATUS = 325,
-	MMC_CPLD_INPUT_CAPTURE_1_IO = 326,
-	MMC_CPLD_INPUT_CAPTURE_1_CONTROL = 327,
-	MMC_CPLD_INPUT_CAPTURE_1_DESIRED_EVENTS = 328,
-	MMC_CPLD_INPUT_CAPTURE_1_FIRST_INDEX = 329,
-	MMC_CPLD_INPUT_CAPTURE_1_NEXT_INDEX = 330,
-	MMC_CPLD_INPUT_CAPTURE_1_STATUS = 331,
-	MMC_CPLD_INPUT_CAPTURE_1_POS_UU_ARR = 332,
-	MMC_CPLD_INPUT_CAPTURE_1_EVENT_TIME = 333,
-	MMC_CPLD_INPUT_CAPTURE_2_IO = 334,
-	MMC_CPLD_INPUT_CAPTURE_2_CONTROL = 335,
-	MMC_CPLD_INPUT_CAPTURE_2_DESIRED_EVENTS = 336,
-	MMC_CPLD_INPUT_CAPTURE_2_FIRST_INDEX = 337,
-	MMC_CPLD_INPUT_CAPTURE_2_NEXT_INDEX = 338,
-	MMC_CPLD_INPUT_CAPTURE_2_STATUS = 339,
-	MMC_CPLD_INPUT_CAPTURE_2_POS_UU_ARR = 340,
-	MMC_CPLD_INPUT_CAPTURE_2_EVENT_TIME = 341,
-	MMC_KIN_LINEAR_UNITS_TYPE = 342,  //@YL & @IR - 17.03.2019 - Added Enhanced User Units support - within kinematics interface
-	MMC_KIN_ANGLE_UNITS_TYPE = 343,	//@YL & @IR - 17.03.2019 - Added Enhanced User Units support - within kinematics interface
-	MMC_TARGET_RADIUS_DELAY					= 344, 	//@YL 20200806. relevant on ly for MMC_IN_TARGET_MODE (2), new mode.
-	MMC_AXIS_TEMPERATURE                    = 345, //@IR - 25.10.2020 - Added support for temperature readout for each axis. (0x3610,0x3E10,0x4610,0x4E10)
-    MMC_MAX_PARAMETERS_NUM
+	MMC_CPLD_EMULATION4_INT_ARR				= 316,
+	MMC_CPLD_EMULATION4_DOUBLE_ARR			= 317,
+	MMC_CPLD_EMULATION5_INT_ARR				= 318,
+	MMC_CPLD_EMULATION5_DOUBLE_ARR			= 319,
+	MMC_CPLD_EMULATION6_INT_ARR				= 320,
+	MMC_CPLD_EMULATION6_DOUBLE_ARR			= 321,
+	MMC_CPLD_EMULATION_3_STATUS				= 322,
+	MMC_CPLD_EMULATION_4_STATUS				= 323,
+	MMC_CPLD_EMULATION_5_STATUS				= 324,
+	MMC_CPLD_EMULATION_6_STATUS				= 325,
+	MMC_CPLD_INPUT_CAPTURE_1_IO				= 326,
+	MMC_CPLD_INPUT_CAPTURE_1_CONTROL		= 327,
+	MMC_CPLD_INPUT_CAPTURE_1_DESIRED_EVENTS	= 328,
+	MMC_CPLD_INPUT_CAPTURE_1_FIRST_INDEX	= 329,
+	MMC_CPLD_INPUT_CAPTURE_1_NEXT_INDEX		= 330,
+	MMC_CPLD_INPUT_CAPTURE_1_STATUS			= 331,
+	MMC_CPLD_INPUT_CAPTURE_1_POS_UU_ARR		= 332,
+	MMC_CPLD_INPUT_CAPTURE_1_EVENT_TIME		= 333,
+	MMC_CPLD_INPUT_CAPTURE_2_IO				= 334,
+	MMC_CPLD_INPUT_CAPTURE_2_CONTROL		= 335,
+	MMC_CPLD_INPUT_CAPTURE_2_DESIRED_EVENTS	= 336,
+	MMC_CPLD_INPUT_CAPTURE_2_FIRST_INDEX	= 337,
+	MMC_CPLD_INPUT_CAPTURE_2_NEXT_INDEX		= 338,
+	MMC_CPLD_INPUT_CAPTURE_2_STATUS			= 339,
+	MMC_CPLD_INPUT_CAPTURE_2_POS_UU_ARR		= 340,
+	MMC_CPLD_INPUT_CAPTURE_2_EVENT_TIME		= 341,
+	MMC_KIN_LINEAR_UNITS_TYPE				= 342,  //@YL & @IR - 17.03.2019 - Added Enhanced User Units support - within kinematics interface
+	MMC_KIN_ANGLE_UNITS_TYPE				= 343,	//@YL & @IR - 17.03.2019 - Added Enhanced User Units support - within kinematics interface
+
+	MMC_TARGET_RADIUS_DELAY					= 344,
+	MMC_AXIS_TEMPERATURE                    = 345,  //@IR - 25.10.2020 - Added support for temperature readout for each axis. (0x3610,0x3E10,0x4610,0x4E10)
+	MMC_DOUBLE_SPEED_OVERRIDE				= 346,  //@UM  : dsovr param  (double speed override) :  05.12.2019 - (DOUBLE SPEED OVERRIDE PARAMETER FOR BETTER RESOLUTION)
+
+	MMC_CPLD_OUTPUT_COMPARE_1_WINDOWING		= 347,  //@YS
+	MMC_CPLD_OUTPUT_COMPARE_2_WINDOWING		= 348,  //@YS
+	MMC_ENABLE_OC1_PULSES                   = 349,  //@YS
+	MMC_ENABLE_OC2_PULSES                   = 350,  //@YS
+	MMC_USE_SCP_PROTOCOL                    = 351,  //@IR - 25.01.2021 - Added new parameter to allow FW download and Upload Snapshot parameters using SCP (instead of TFTP)
+
+	MMC_ACCFF_1_AXIS_REF_ARR				= 352,  //@YS - 11.03.2021
+	MMC_ACCFF_1_MODE						= 353,
+	MMC_ACCFF_1_COEF_ARR					= 354,
+	MMC_ACCFF_1_STATUS						= 355,
+	MMC_ACCFF_2_AXIS_REF_ARR				= 356,
+	MMC_ACCFF_2_MODE						= 357,
+	MMC_ACCFF_2_COEF_ARR					= 358,
+	MMC_ACCFF_2_STATUS						= 359,
+	MMC_ACCFF_3_AXIS_REF_ARR				= 360,
+	MMC_ACCFF_3_MODE						= 361,
+	MMC_ACCFF_3_COEF_ARR					= 362,
+	MMC_ACCFF_3_STATUS						= 363,
+	MMC_ACCFF_4_AXIS_REF_ARR				= 364,
+	MMC_ACCFF_4_MODE						= 365,
+	MMC_ACCFF_4_COEF_ARR					= 366,
+	MMC_ACCFF_4_STATUS						= 367,
+	MMC_ACCFF_5_AXIS_REF_ARR				= 368,
+	MMC_ACCFF_5_MODE						= 369,
+	MMC_ACCFF_5_COEF_ARR					= 370,
+	MMC_ACCFF_5_STATUS						= 371,  //@YS - 11.03.2021
+	MMC_MAX_PARAMETERS_NUM
 }MMC_PARAMETER_LIST_ENUM;
 
 //@ML CPLD
@@ -1052,7 +1082,7 @@ typedef enum
 
 
 //GLOBAL Parameters offset Index.
-//Should be use in GetGblParamOffset unsigned long ulGblParamOffset[100] as array index
+//Should be use in GetGblParamOffset uint32_t ulGblParamOffset[100] as array index
 typedef enum
 {
     eCOUNTER_OFFSET_IDX,
@@ -1219,7 +1249,21 @@ typedef enum command_operatioin
     eMMC_COMMAND_OPERATION_ENABLEPERMISSION     = 6,
     eMMC_COMMAND_OPERATION_RESET_TO_FACTORY     = 7,
 }MC_COMMAND_OPERATION;
-
+//@UM 11.05.2020 enum ecatstate
+/*! @brief Possible States and additional auxiliary constants.
+See also documentation about EtherCAT State Machine. */
+typedef enum _EcatState
+{
+	eEcatStateNotSet = 0x00, /*!< State is not set                    */
+	eEcatStateI = 0x01, /*!< EtherCAT State "Init"               */
+	eEcatStateP = 0x02, /*!< EtherCAT State "Pre-Operational"    */
+	eEcatStateB = 0x03, /*!< EtherCAT State "Bootstrap"          */
+	eEcatStateS = 0x04, /*!< EtherCAT State "Safe-Operational"   */
+	eEcatStateO = 0x08, /*!< EtherCAT State "Operational"        */
+					   /*! Mask for significant bits of a variable that represents EtherCAT State. */
+					   eEcatStateMask = (eEcatStateI | eEcatStateP | eEcatStateB | eEcatStateS | eEcatStateO),
+					   eEcatStateErrorFlag = 0x10 /*!< Error flag                          */
+}EcatState;
 ///////////////////////////////////////////////////////////////////////////////
 /// \struct MMC_READPARAMETER_IN
 /// \brief
@@ -1259,7 +1303,7 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_LINT32 lValue;
+    int32_t		lValue;
     ELMO_UINT16 usStatus;
     ELMO_INT16  usErrorID;
 }MMC_READBOOLPARAMETER_OUT;
@@ -1292,7 +1336,7 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_LINT32 lValue;
+    int32_t		lValue;
     MMC_PARAMETER_LIST_ENUM eParameterNumber;
     ELMO_INT32  iParameterArrIndex;
     ELMO_UINT8  ucEnable;
@@ -1802,7 +1846,7 @@ typedef struct mmc_readpivarfloat_out
 /// \struct MMC_READPIVARLONGLONG_IN
 /// \brief
 ///////////////////////////////////////////////////////////////////////////////
-typedef struct mmc_readpivarsignedlonglong_in
+typedef struct mmc_readpivarsignedint32_tint32_t_in
 {
     ELMO_UINT16 usIndex;
     ELMO_UINT8  ucDirection;
@@ -1812,7 +1856,7 @@ typedef struct mmc_readpivarsignedlonglong_in
 /// \struct MMC_READPIVARLONGLONG_OUT
 /// \brief
 ///////////////////////////////////////////////////////////////////////////////
-typedef struct mmc_readpivarsignedlonglong_out
+typedef struct mmc_readpivarsignedint32_tint32_t_out
 {
     ELMO_INT64  llData;
     ELMO_UINT16 usStatus;
@@ -1823,7 +1867,7 @@ typedef struct mmc_readpivarsignedlonglong_out
 /// \struct MMC_READPIVARUSLONGLONG_IN
 /// \brief
 ///////////////////////////////////////////////////////////////////////////////
-typedef struct mmc_readpivarunsignedlonglong_in
+typedef struct mmc_readpivarunsignedint32_tint32_t_in
 {
     ELMO_UINT16 usIndex;
     ELMO_UINT8  ucDirection;
@@ -1833,7 +1877,7 @@ typedef struct mmc_readpivarunsignedlonglong_in
 /// \struct MMC_READPIVARULONGLONG_OUT
 /// \brief
 ///////////////////////////////////////////////////////////////////////////////
-typedef struct mmc_readpivarunsignedlonglong_out
+typedef struct mmc_readpivarunsignedint32_tint32_t_out
 {
     ELMO_UINT64 ullData;
     ELMO_UINT16 usStatus;
@@ -2070,7 +2114,7 @@ typedef struct mmc_writepivarfloat_out
 /// \struct MMC_WRITEPIVARLONGLONG_IN
 /// \brief
 ///////////////////////////////////////////////////////////////////////////////
-typedef struct mmc_writelargepivarsignedlonglong_in
+typedef struct mmc_writelargepivarsignedint32_tint32_t_in
 {
     ELMO_INT64  llData;
     ELMO_UINT16 usIndex;
@@ -2080,7 +2124,7 @@ typedef struct mmc_writelargepivarsignedlonglong_in
 /// \struct MMC_WRITEPIVARLONGLONG_OUT
 /// \brief
 ///////////////////////////////////////////////////////////////////////////////
-typedef struct mmc_writelargepivarsignedlonglong_out
+typedef struct mmc_writelargepivarsignedint32_tint32_t_out
 {
     ELMO_UINT16 usStatus;
     ELMO_INT16  usErrorID;
@@ -2090,7 +2134,7 @@ typedef struct mmc_writelargepivarsignedlonglong_out
 /// \struct MMC_WRITEPIVARULONGLONG_IN
 /// \brief
 ///////////////////////////////////////////////////////////////////////////////
-typedef struct mmc_writelargepivarunsignedlonglong_in
+typedef struct mmc_writelargepivarunsignedint32_tint32_t_in
 {
     ELMO_UINT64 ullData;
     ELMO_UINT16 usIndex;
@@ -2100,7 +2144,7 @@ typedef struct mmc_writelargepivarunsignedlonglong_in
 /// \struct MMC_WRITEPIVARULONGLONG_OUT
 /// \brief
 ///////////////////////////////////////////////////////////////////////////////
-typedef struct mmc_writelargepivarunsignedlonglong_out
+typedef struct mmc_writelargepivarunsignedint32_tint32_t_out
 {
     ELMO_UINT16 usStatus;
     ELMO_INT16  usErrorID;
@@ -2356,7 +2400,7 @@ typedef enum
 typedef union
 {
     NC_BULKREAD_PRESET_ENUM eBulkReadPreset;
-    ELMO_ULINT32            ulBulkReadParameters[NC_MAX_REC_SIGNALS_NUM];
+	uint32_t ulBulkReadParameters[NC_MAX_REC_SIGNALS_NUM];
 } NC_BULKREAD_PARAMETERS_UNION;
 
 typedef union
@@ -2365,10 +2409,10 @@ typedef union
     ELMO_UINT8  ucVar;
     ELMO_INT16  sVar;
     ELMO_UINT16 usVar;
-    ELMO_INT32  iVar;
-    ELMO_UINT32 uiVar;
-    ELMO_LINT32 lVar;
-    ELMO_ULINT32 ulVar;
+	ELMO_INT32  iVar;
+	ELMO_UINT32 uiVar;
+	int32_t 	lVar;
+	uint32_t 	ulVar;
 } NC_BULKREAD_VARIABLE_UNION;
 
 typedef enum
@@ -2383,7 +2427,7 @@ typedef struct
     ELMO_INT32  aPos;
     ELMO_INT32  aVel;
     ELMO_INT32  aTorque;
-    ELMO_ULINT32 ulAxisStatus;
+	uint32_t 	ulAxisStatus;
     ELMO_UINT32 uiInputs;
     OPM402      eOpMode;
 } NC_BULKREAD_PRESET_1;
@@ -2402,7 +2446,7 @@ typedef struct
     ELMO_INT32                  aPos;
     ELMO_INT32                  aVel;
     ELMO_INT32                  aTorque;
-    ELMO_ULINT32                ulAxisStatus;
+	uint32_t 					ulAxisStatus;
     ELMO_UINT32                 uiInputs;
     OPM402                      eOpMode;
     NC_BULKREAD_VARIABLE_UNION  ucCommError;
@@ -2419,7 +2463,7 @@ typedef struct
     ELMO_INT32  iPosFollowingErr;
     ELMO_INT32  aVel;
     ELMO_INT32  aTorque;
-    ELMO_ULINT32 ulAxisStatus;
+	uint32_t 	ulAxisStatus;
     ELMO_UINT32 uiInputs;
     OPM402      eOpMode;
     ELMO_UINT32 uiStatusRegister;
@@ -2433,7 +2477,7 @@ typedef struct
     ELMO_INT32                  iPosFollowingErr;
     ELMO_INT32                  aVel;
     ELMO_INT32                  aTorque;
-    ELMO_ULINT32                ulAxisStatus;
+    uint32_t	                ulAxisStatus;
     ELMO_UINT32                 uiInputs;
     OPM402                      eOpMode;
     ELMO_UINT32                 uiStatusRegister;
@@ -2700,11 +2744,11 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_ULINT32 uiRg;                         ///< Recording Data Gap.
-    ELMO_ULINT32 uiRl;                         ///< Recording Data Length.
-    ELMO_ULINT32 uiRc;                         ///< Recording Data Signals Bit mask.
-    ELMO_ULINT32 uiRv[NC_MAX_REC_SIGNALS_NUM]; ///< Recording Signals Id's.
-    ELMO_ULINT32 uiRp[NC_MAX_REC_PARAMS_NUM];  ///< Recording Parameters.
+	uint32_t 	uiRg;							///< Recording Data Gap.
+	uint32_t 	uiRl;							///< Recording Data Length.
+	uint32_t 	uiRc;							///< Recording Data Signals Bit mask.
+	uint32_t 	uiRv[NC_MAX_REC_SIGNALS_NUM];	///< Recording Signals Id's.  //@ML. 
+	uint32_t 	uiRp[NC_MAX_REC_PARAMS_NUM];	///< Recording Parameters.
 }MMC_BEGIN_RECORDING_IN;
 
 
@@ -2714,12 +2758,12 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_ULINT32 uiRg;                                      ///< Recording Data Gap.
-    ELMO_ULINT32 uiRl;                                      ///< Recording Data Length.
-    ELMO_ULINT32 uiRv[NC_ENHANCED_MAX_REC_SIGNALS_NUM]; ///< Recording Signals Id's.
-    ELMO_ULINT32 uiRp[NC_ENHANCED_REC_MAX_PARAMS_NUM];      ///< Recording Parameters.
-    ELMO_ULINT32 uiNrv;
-    ELMO_ULINT32 uiSpare[16];
+	uint32_t 	uiRg;										///< Recording Data Gap.
+	uint32_t 	uiRl;										///< Recording Data Length.
+	uint32_t 	uiRv[NC_ENHANCED_MAX_REC_SIGNALS_NUM];	///< Recording Signals Id's.
+	uint32_t 	uiRp[NC_ENHANCED_REC_MAX_PARAMS_NUM];		///< Recording Parameters.
+	uint32_t 	uiNrv;
+	uint32_t 	uiSpare[16];
 }MMC_BEGIN_ENHANCED_RECORDING_IN;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2768,9 +2812,10 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_LINT32 ulUpdatData[NC_MAX_LONG];   ///< Uploaded Data Array.
-    ELMO_UINT16 usStatus;                   ///< Returned command status.
-    ELMO_INT16  usErrorID;                  ///< Returned command error ID.
+	int32_t 	ulUpdatData[NC_MAX_LONG];	///< Uploaded Data Array.
+	ELMO_UINT16 usStatus;		///< Returned command status.
+	ELMO_INT16  usErrorID;				///< Returned command error ID.
+	
 }MMC_UPLOAD_DATA_OUT;
 
 typedef struct
@@ -2796,10 +2841,10 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_ULINT32    uiRr;           ///< Rest Recording Index.
-    ELMO_ULINT32    uiSr;           ///< Recorder Trigger Status.
-    ELMO_UINT16     usStatus;       ///< Returned command status.
-    ELMO_INT16      usErrorID;      ///< Returned command error ID.
+	uint32_t  	uiRr;			///< Rest Recording Index.
+	uint32_t  	uiSr;			///< Recorder Trigger Status.
+    ELMO_UINT16 usStatus;       ///< Returned command status.
+    ELMO_INT16  usErrorID;      ///< Returned command error ID.
 }MMC_REC_STATUS_OUT;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2827,9 +2872,9 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_ULINT32    ulValue;  ///< Signal Value Reference Handle.
-    ELMO_ULINT32    ulType;   ///< Signal Value Type.
-    ELMO_FLOAT       ulFactor;         ///< Signal Value Multiple Factor.
+	uint32_t 	ulValue;	///< Signal Value Reference Handle.
+	uint32_t 	ulType;	///< Signal Value Type.
+    ELMO_FLOAT  ulFactor;         ///< Signal Value Multiple Factor.
 }NC_REC_RV_STRUCT;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2839,7 +2884,7 @@ typedef struct
 #pragma pack(push,4)
 typedef struct 
 {
-    ELMO_ULINT32 ulValue;   ///< Signal Value Reference Handle.
+	uint32_t 	ulValue;	///< Signal Value Reference Handle.
     ELMO_DOUBLE  dFactor;   ///< Signal Value Multiple Factor.
 }NC_ENHANCED_REC_RV_STRUCT;
 #pragma pack(pop)
@@ -2850,18 +2895,18 @@ typedef struct
 /// \brief Recorder Upload Data Header Structure.
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct {
-    ELMO_ULINT32    ulDummy;      ///< For alignment to upload data field in common message
-    ELMO_ULINT32    ulRc;         ///< Recording Data Signals Bit mask.
-    ELMO_ULINT32    ulRg;         ///< Recording Data Gap.
-    ELMO_ULINT32    ulRl;         ///< Recording Data Length.
+	uint32_t 	ulDummy;		///< For alignment to upload data field in common message
+	uint32_t 	ulRc;			///< Recording Data Signals Bit mask.
+	uint32_t 	ulRg;			///< Recording Data Gap.
+	uint32_t 	ulRl;			///< Recording Data Length.
     NC_REC_RV_STRUCT usRv[NC_MAX_REC_SIGNALS_NUM];  ///< Recording Signals Id's.
-    ELMO_ULINT32    ulRp[NC_MAX_REC_PARAMS_NUM];      ///< Recording Parameters.
-    ELMO_ULINT32    ulTi;         ///< Trigger Index
-    ELMO_ULINT32    ulTs;         ///< Recorder Update Time
-    ELMO_ULINT32    ulSpare[3];   ///< Spare
-    ELMO_UINT8      dummy [948] ;
-    ELMO_UINT16     usStatus;    ///< Returned command status.
-    ELMO_INT16      usErrorID;    ///< Returned command error ID.
+	uint32_t 	ulRp[NC_MAX_REC_PARAMS_NUM];		///< Recording Parameters.
+	uint32_t 	ulTi;			///< Trigger Index
+	uint32_t 	ulTs;			///< Recorder Update Time
+	uint32_t 	ulSpare[3];		///< Spare
+    ELMO_UINT8  dummy [948] ;
+    ELMO_UINT16 usStatus;    	///< Returned command status.
+    ELMO_INT16  usErrorID;    	///< Returned command error ID.
 }NC_UPLOAD_REC_HEADER_STRUCT;
 
 
@@ -2870,19 +2915,19 @@ typedef struct {
 /// \brief Recorder Upload Data Header Structure.
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct {
-    ELMO_ULINT32 ulDummy;       ///< For alignment to upload data field in common message
-    ELMO_ULINT32 ulRg;          ///< Recording Data Gap.
-    ELMO_ULINT32 ulRl;          ///< Recording Data Length.
+	uint32_t 	ulDummy;	///< For alignment to upload data field in common message
+	uint32_t 	ulRg;		///< Recording Data Gap.
+	uint32_t 	ulRl;		///< Recording Data Length.
     NC_ENHANCED_REC_RV_STRUCT usRv[NC_ENHANCED_MAX_REC_SIGNALS_NUM];            ///< Recording Signals Id's.
-    ELMO_UINT8   ucType[NC_ENHANCED_MAX_REC_SIGNALS_NUM];           ///< Signal Value Type.
-    ELMO_ULINT32 ulRp[NC_ENHANCED_REC_MAX_PARAMS_NUM];      ///< Recording Parameters.
-    ELMO_ULINT32 ulNrv;     ///< Recording Data Signals Bit mask.
-    ELMO_ULINT32 ulTi;          ///< Trigger Index
-    ELMO_ULINT32 ulTs;          ///< Recorder Update Time
-    ELMO_ULINT32 ulSpare[3];    ///< Spare
-    ELMO_UINT8   dummy [76] ;
-    ELMO_UINT16  usStatus;  ///< Returned command status.
-    ELMO_INT16   usErrorID; ///< Returned command error ID.
+    ELMO_UINT8  ucType[NC_ENHANCED_MAX_REC_SIGNALS_NUM];           ///< Signal Value Type.
+	uint32_t 	ulRp[NC_ENHANCED_REC_MAX_PARAMS_NUM];		///< Recording Parameters.
+	uint32_t 	ulNrv;		///< Recording Data Signals Bit mask.
+	uint32_t 	ulTi;		///< Trigger Index
+	uint32_t 	ulTs;		///< Recorder Update Time
+	uint32_t 	ulSpare[3];	///< Spare
+    ELMO_UINT8  dummy [76] ;
+    ELMO_UINT16 usStatus;  	///< Returned command status.
+    ELMO_INT16  usErrorID; 	///< Returned command error ID.
 }NC_ENHANCED_UPLOAD_REC_HEADER_STRUCT;
 
 
@@ -2911,7 +2956,7 @@ typedef struct
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct
 {
-    ELMO_ULINT32    ulCRC;
+	uint32_t 		ulCRC;
 }MMC_DOWNLOADVERSION_IN;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -3160,10 +3205,118 @@ typedef struct
     ELMO_UINT16     usStatus;
     ELMO_INT16      usErrorID;
 }MMC_READDOWNLOADVERSTATUS_OUT;
+//@UM 11.05.2020 input structure for Change Ecat Mode
+typedef struct
+{
+	//unsigned char ch_mode;
+	EcatState eEcatState;
+}MMC_CHANGE_ECAT_STATE_IN;
+//@UM 11.05.2020 output structure for Change Ecat Mode
+typedef struct
+{
+	ELMO_UINT16 usStatus;
+	ELMO_INT16 usErrorID;
+}MMC_CHANGE_ECAT_STATE_OUT;
 
+//@UM Begin Topology 15.10.2020 Topology Handle
+
+typedef struct mmc_topology_handle_in
+{
+	ELMO_INT16 dummy;
+}MMC_ECAT_TOPOLOGY_IN;
+
+typedef struct mmc_topology_handle_out
+{
+	ELMO_UINT16 uiTopologyHandle; //out
+	ELMO_UINT16 usnumberOfConnectedSlaves; //out
+	ELMO_UINT16 usStatus;
+	ELMO_INT16  usErrorID;
+}MMC_ECAT_TOPOLOGY_OUT;
+//@UM 15.10.2020 - New  Master's Tree Node Types
+typedef enum tagEAS_MasterPortType //ENUM
+{
+    EcatPortTypeMasterMain,      // node representing primary master’s port
+    EcatPortTypeMasterAux,        // node representing secondary master’s port
+}EAS_MasterPortType;
+typedef struct tagEAS_MasterTreeNode
+{
+    struct {
+        ELMO_UINT16  wConnectedNode;     // index of connected node
+        ELMO_UINT8   byConnectedPort;// connected port
+        ELMO_UINT8   bIsConnected;
+    }port;         // port belongs to EcatPortTypeMasterMain or  belongs to EcatPortTypeMasterAux
+}EAS_MasterTreeNode;
+typedef struct tagECAT_GET_MASTER_TREE_NODE
+{
+	ELMO_UINT16			uiTopologyHandleIn; //IN from user space
+	EAS_MasterPortType 	masterPortTypeIn; //IN ENUM from user space
+	EAS_MasterTreeNode 	masterTreeNodeOut; //OUT return EAS_MasterTreeNode structure
+}ECAT_GET_MASTER_TREE_NODE;
+//@UM 15.10.2020 mmc_master_tree_node_in
+typedef struct mmc_master_tree_node_in
+{
+	ELMO_UINT16  uiTopologyHandleIn; //IN
+	ELMO_UINT16  uipadding; //IN
+	EAS_MasterPortType eMasterPortTypeIn; //IN ENUM
+}MMC_ECAT_GET_MASTER_TREE_NODE_IN;
+//@UM 15.10.2020 mmc_master_tree_node_out
+typedef struct mmc_master_tree_node_out
+{
+	EAS_MasterTreeNode master_tree_node; // 4 Bytes
+	ELMO_UINT16 uiTopologyHandleOut;
+	ELMO_UINT16 usdummy; //2 Bytes Padding to enforce {4 bytes multiply}
+	ELMO_UINT16 usStatus;
+	ELMO_INT16 	usErrorID;
+}MMC_ECAT_GET_MASTER_TREE_NODE_OUT;
+//Slave Topology Structures Begin :
+//Slave Enum for EAS
+typedef enum tagEAS_SlaveTreePortType
+{    EcatPortTypeSlaveOnMain = 0x00,    // slave node that is on primary leg
+    EcatPortTypeSlaveOnAux = 0x01       // slave node that is on secondary leg
+}EAS_SlaveTreePortType;
+
+//Slave Tree Node
+typedef struct tagEAS_SlaveTreeNode {
+	struct 
+	{
+		ELMO_INT16   wConnectedNode;     // index of connected node
+		ELMO_UINT8   byConnectedPort;// connected port
+		ELMO_UINT8   bIsConnected;
+	} port[4];
+	EAS_SlaveTreePortType  eNodeType;
+	ELMO_UINT16  wFixAddr;
+    ELMO_UINT8   byIncomingPort;                 // calculated incoming port (lowest   dwRcvTime on this port)
+    ELMO_UINT8   byFirstForwardPort;           // calculated forward port (first ingress port in forward direction)
+}EAS_SlaveTreeNode;
+
+typedef struct tagECAT_GET_SLAVE_TREE_NODE
+{
+	EAS_SlaveTreeNode SlaveTreeNodeOut;
+	ELMO_UINT16  uiTopologyHandleIn; //IN
+	ELMO_UINT16  uiSlaveId; //IN ENUM
+}ECAT_GET_SLAVE_TREE_NODE;
+
+//MMC For Slave Topology
+typedef struct mmc_slave_tree_node_in
+{
+	ELMO_UINT16  uiTopologyHandleIn; //IN
+	ELMO_UINT16  uiSlaveId; //IN ENUM
+}MMC_ECAT_GET_SLAVE_TREE_NODE_IN;
+
+typedef struct mmc_slave_tree_node_out
+{
+	EAS_SlaveTreeNode stSlaveTreeNode; //24 Bytes
+	ELMO_UINT16 uiTopologyHandleOut;
+	ELMO_UINT16 usdummy; //2 Bytes Padding to enforce {4 bytes multiply}
+	ELMO_UINT16 usStatus;
+	ELMO_INT16 	usErrorID;
+}MMC_ECAT_GET_SLAVE_TREE_NODE_OUT;
+//End Slave Tolopology
+
+//@UM End Topology
 typedef struct 
 {
-    ELMO_UINT8      ucDummy;
+	ELMO_UINT8		ucState;
 }MMC_SET_GMAS_PREOP_IN;
 
 typedef struct 
@@ -3217,6 +3370,27 @@ typedef struct mmc_downloadfoe_out
     ELMO_UINT16     usErrorID;
 }MMC_DOWNLOADFOE_OUT;
 
+//@IR 24.01.2021 - Added new API to support Download/Upload of files via FoE service
+typedef struct mmc_downloadfoeex_in
+{
+	ELMO_UINT16	pwSlaveId[NC_NODES_SING_AXIS_NUM];  // list of slaves IDs to be executed FoE on.
+	ELMO_INT8  pcFileName[256]; 								// file name to upload/download.
+	ELMO_UINT8 ucSlavesNum;					     	// number of slaves to be executed FoE on.
+	ELMO_UINT8 ucOperation;       				 	// 1 = upload , 2 = download
+	ELMO_UINT8 ucInitialState;    				 	// The Ecat state to move to before the upload/download starts.
+	ELMO_UINT8 ucFinalState;      					// The Ecat state to move to after the upload/download ends.
+	ELMO_UINT8 ucFileSavedInFlash;      				// 0 = Saved in RAM (/tmp), 1 = Saved in Flash (/mnt/jffs/usr)
+	ELMO_UINT8 ucDeleteFileAfterDownload;      		// 0 = do not delete, 1 = delete
+	uint32_t  ulPassword;                           // Password field, in order to not allow running over a file by mistake.
+	ELMO_UINT8 ucReservedBytes[32];  				// Reserved.
+}MMC_DOWNLOADFOEEX_IN;
+
+//@IR 24.01.2021 - Added new API to support Download/Upload of files via FoE service
+typedef struct mmc_downloadfoeex_out
+{
+	ELMO_UINT16 usStatus;
+	ELMO_UINT16 usErrorID;
+}MMC_DOWNLOADFOEEX_OUT;
 
 typedef struct mmc_getfoestatus_in
 {
@@ -3241,10 +3415,10 @@ typedef struct mmc_getfoestatus_out
 
 typedef struct _MMC_ECAT_SII_CONTENT
 {
-    ELMO_ULINT32    ulVendorId;
-    ELMO_ULINT32    ulProductCode;
-    ELMO_ULINT32    ulRevisionNo;
-    ELMO_ULINT32    ulSerialNo;
+    uint32_t    ulVendorId;
+    uint32_t    ulProductCode;
+    uint32_t    ulRevisionNo;
+    uint32_t    ulSerialNo;
 } MMC_ECAT_SII_CONTENT;
 
 typedef struct mmc_getcommstatisticsex_in
@@ -3255,10 +3429,10 @@ typedef struct mmc_getcommstatisticsex_in
 
 typedef struct mmc_getcommstatisticsex_out
 {
-    ELMO_ULINT32    dwSendErrors;
-    ELMO_ULINT32    dwReceiveErrors;
-    ELMO_ULINT32    dwWrongWC;
-    ELMO_ULINT32    dwParseErrors;
+    uint32_t    	dwSendErrors;
+    uint32_t    	dwReceiveErrors;
+    uint32_t    	dwWrongWC;
+    uint32_t    	dwParseErrors;
     MMC_ECAT_SII_CONTENT pstSII_Content[ETHERCAT_STATISTICSEX_MAX_SLAVES];
     ELMO_UINT16     usNumOfSlaves;
     ELMO_UINT16     usStatus;
@@ -3364,9 +3538,9 @@ typedef struct mmc_performbulkreadpi_in
 
 typedef struct mmc_performbulkreadpi_out
 {
-    ELMO_ULINT32    ulOutBuf[NC_MAX_BULK_READ_READABLE_PACKET_SIZE];
-    ELMO_UINT16     usStatus;
-    ELMO_INT16      usErrorID;
+	uint32_t ulOutBuf[NC_MAX_BULK_READ_READABLE_PACKET_SIZE];
+	ELMO_UINT16 usStatus;
+	ELMO_INT16  usErrorID;
 } MMC_PERFORMBULKREADPI_OUT;
 
 typedef struct mmc_toggleconsoleoutput_in
@@ -3450,14 +3624,14 @@ typedef struct
 
 typedef struct
 {
-    ELMO_ULINT32    ulCyclesCounter;
+    uint32_t        ulCyclesCounter;
     ELMO_UINT16     usStatus;
     ELMO_INT16      usErrorID;
 } MMC_GETCYCLESCOUNTER_OUT;
 
 typedef struct
 {
-    ELMO_ULINT32    ulDwellTimeMs;
+    uint32_t        ulDwellTimeMs;
 } MMC_DWELL_IN;
 
 typedef struct
@@ -3473,7 +3647,7 @@ typedef struct mmc_waituntilconditionfb_in
     ELMO_INT32      iParameterID;
     ELMO_INT32      iParameterIndex;
     MC_CONDITIONFB_OPERATION_TYPE eOperationType;
-    ELMO_ULINT32    ulSpare;
+    uint32_t        ulSpare;
     ELMO_UINT16     usSourceAxisReference;
     ELMO_UINT8      ucExecute;
     ELMO_UINT8      ucPadding;
@@ -3494,7 +3668,7 @@ typedef struct mmc_waituntilconditionfbex_in
     ELMO_INT32      iParameterID;
     ELMO_INT32      iParameterIndex;
     MC_CONDITIONFB_OPERATION_TYPE eOperationType;
-    ELMO_ULINT32    ulSpare;
+	uint32_t 		ulSpare;
     ELMO_UINT16     usSourceAxisReference;
     ELMO_UINT8      ucExecute;
     ELMO_UINT8      ucDirection;
@@ -3583,7 +3757,7 @@ typedef struct mmc_getgmasinfo_out
     ELMO_UINT8      ucPadding1;
     ELMO_UINT8      ucPadding2;
     ELMO_UINT8      ucPadding3;
-    ELMO_ULINT32    ulSpear[4];
+	uint32_t 		ulSpear[4];
     ELMO_UINT16     usStatus;    ///< Returned command status.
     short sErrorID;             ///< Returned command error ID.
 } MMC_GETGMASINFO_OUT;
@@ -3628,7 +3802,7 @@ typedef struct mmc_setMaestroTime_in
     ELMO_UINT16 usMinute;
     ELMO_UINT16 usSecond;
     ELMO_UINT16 usMillisecond;
-    ELMO_INT8 cSpares[16];
+    ELMO_INT8 	cSpares[16];
 } MMC_SET_MAESTRO_TIME_IN;
 
 typedef struct mmc_setMaestroTime_out
@@ -3646,14 +3820,14 @@ typedef struct
 typedef struct
 {
     ELMO_UINT16 usStatus;   ///< Returned command status.
-    ELMO_INT8 sErrorID;     ///< Returned command error ID.
+    ELMO_INT8 	sErrorID;     ///< Returned command error ID.
 } MMC_BURN_CPLD_OUT;
 
 //@ML CPLD
 typedef struct
 {
-    ELMO_UINT32 ulSpare[50];
-    ELMO_UINT8 ucConfigFunc;
+	uint32_t 	ulSpare[50];
+    ELMO_UINT8 	ucConfigFunc;
 } MMC_CONFIG_CPLD_IN;
 
 typedef struct
@@ -3671,27 +3845,27 @@ typedef struct
 } MMC_GETNODEDIRECTDATA_IN;
 typedef struct
 {
-//  unsigned long uldPosOffset;
-    ELMO_ULINT32 ulNodeDataOffset[300];
-    ELMO_UINT16  usStatus;      ///< Returned command status.
-    ELMO_INT16   sErrorID;      ///< Returned command error ID.
+//	uint32_t 	uldPosOffset;
+	uint32_t 	ulNodeDataOffset[300];
+    ELMO_UINT16 usStatus;      ///< Returned command status.
+    ELMO_INT16  sErrorID;      ///< Returned command error ID.
 } MMC_GETNODEDIRECTDATA_OUT;
 
 typedef struct
 {
-    ELMO_UINT8 ucDummy;
+    ELMO_UINT8 	ucDummy;
 } MMC_GETGLBLPARAMOFFSET_IN;
 
 typedef struct
 {
-    ELMO_ULINT32 ulGblParamOffset[100];
-    ELMO_UINT16  usStatus;      ///< Returned command status.
-    ELMO_INT16   sErrorID;      ///< Returned command error ID.
+	uint32_t 	ulGblParamOffset[100];
+    ELMO_UINT16 usStatus;      ///< Returned command status.
+    ELMO_INT16  sErrorID;      ///< Returned command error ID.
 } MMC_GETGLBLPARAMOFFSET_OUT;
 
 typedef struct
 {
-    ELMO_UINT8 ucNumberofAxes;
+    ELMO_UINT8 	ucNumberofAxes;
 }MMC_GETAXESNAME_IN;
 
 typedef struct
@@ -3735,7 +3909,7 @@ typedef struct
 
 typedef struct
 {
-    ELMO_ULINT32 ulNodePIMemOffset;
+	uint32_t 	ulNodePIMemOffset;
     ELMO_UINT32 uiIsMandatory;
     ELMO_UINT32 uiPIMemSize;
     ELMO_UINT16 usStatus;    ///< Returned command status.
@@ -4565,7 +4739,7 @@ MMC_LIB_API ELMO_INT32 MMC_SetDefaultParametersGlobalCmd(
 /// \return return - 0 if failed
 ///                  otherwise returns the md5 first 4 bytes.
 ////////////////////////////////////////////////////////////////////////////////
-MMC_LIB_API  ELMO_ULINT32 Calc_md5sum(ELMO_PINT8 fName) ;
+MMC_LIB_API  uint32_t Calc_md5sum(ELMO_PINT8 fName) ;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \fn int MMC_ResImportFileCmd(
@@ -4643,6 +4817,23 @@ MMC_LIB_API ELMO_INT32 MMC_ReadDownloadVersionStatus (
 MMC_LIB_API ELMO_INT32 MMC_ChangeToPreOPMode(
         IN MMC_CONNECT_HNDL         hConn,
         OUT MMC_SET_GMAS_PREOP_OUT* pOutParam) ;
+
+////////////////////////////////////////////////////////////////////////////////
+/// \fn int  MMC_ChangeEthercatState(
+///				IN MMC_CONNECT_HNDL hConn,
+//				IN  MMC_SET_GMAS_PREOP_IN * pInParam,
+///				OUT MMC_SET_GMAS_PREOP_OUT* pOutParam)
+/// \brief	Changes the GMAS to another e Operation mode.
+/// \param  hConn - [IN] Connection handle
+/// \param  pOutParam - [IN] Pointer to MMC_SET_GMAS_PREOP_IN structure.
+/// \param  pOutParam - [OUT] Pointer to MMC_SET_GMAS_PREOP_OUT structure.
+/// \return	return - 0 if success
+/// 				 error_id in case of error
+////////////////////////////////////////////////////////////////////////////////
+MMC_LIB_API ELMO_INT32 MMC_ChangeEthercatState(
+		IN MMC_CONNECT_HNDL hConn,
+		IN  MMC_SET_GMAS_PREOP_IN * pInParam,
+		OUT MMC_SET_GMAS_PREOP_OUT* pOutParam);
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \fn int  MMC_ChangeToOperationMode(
@@ -4807,6 +4998,10 @@ MMC_LIB_API ELMO_INT32 MMC_DownloadFoE(
         IN MMC_DOWNLOADFOE_IN*      pInParam,
         OUT MMC_DOWNLOADFOE_OUT*    pOutParam);
 
+//@IR 24.01.2021 - Added new API to support Download/Upload of files via FoE service
+MMC_LIB_API ELMO_INT32 MMC_DownloadFoEEx(IN MMC_CONNECT_HNDL hConn,
+									  IN MMC_DOWNLOADFOEEX_IN* pInParam,
+									  OUT MMC_DOWNLOADFOEEX_OUT* pOutParam);
 MMC_LIB_API ELMO_INT32 MMC_GetFoEStatus(
         IN MMC_CONNECT_HNDL       hConn,
         OUT MMC_GETFOESTATUS_OUT* pOutParam);

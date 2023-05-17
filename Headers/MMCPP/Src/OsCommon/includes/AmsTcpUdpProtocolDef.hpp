@@ -69,7 +69,7 @@
                                    /*               ...                                                                                     */
                                    /*           };                                                                                          */
                                    /*       int *e __attribute__((aligned(1))) = &a.i;                                                      */
-START_STREAM_PACKED
+#pragma pack(push, 0)
 	typedef struct AMSHDR_TCP_TAG
 		{
 					/* !!! Exist Only In TCP !!!	*/
@@ -98,7 +98,7 @@ START_STREAM_PACKED
                                    /* (and removes that stack entry). Note that #pragma pack([n]) does not influence this internal stack;   */
                                    /* thus it is possible to have #pragma pack(push) followed by multiple #pragma pack(n) instances and     */
                                    /* finalized by a single #pragma pack(pop).                                                              */
-END_STREAM_PACKED
+#pragma pack(pop)
 
                     /* Type of function the class calls for get user data as*/
                     /* response to Client requst Read data from Server      */
@@ -116,7 +116,7 @@ END_STREAM_PACKED
                                          ELMO_UINT32    uiDataClientReqWriteSize,
                                          ELMO_UINT32    uiIndexGroup,
                                          ELMO_UINT32    uiIndexOffset,
-                                         ELMO_PUINT16   puiResult,
+                                         ELMO_PUINT32   puiResult,
                                          AMSHDR_TCP*    ptAmsHdrFromClient,     /* Copy of the org.         */
                                          AMSHDR_TCP**   pptAmsHdrToClient);     /* If Null take from Rcv    */ 
 
