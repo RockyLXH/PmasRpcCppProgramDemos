@@ -116,6 +116,10 @@ int MainLoop()
 
 	cAxis[0].MoveAbsolute(20000, 2000);
 
+	while (!(cAxis[0].ReadStatus() & NC_AXIS_STAND_STILL_MASK));
+	
+	cAxis[1].Stop();
+
 	return 0;
 }
 
